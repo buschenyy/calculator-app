@@ -10,8 +10,8 @@ const calcMemoInitial = {
 }
 
 const calculation = ({ num1, num2, operator }) => {
-  const a = parseInt(num1),
-    b = parseInt(num2)
+  const a = parseInt(num1)
+  const b = parseInt(num2)
   switch (operator) {
     case '/':
       return a / b
@@ -28,41 +28,44 @@ function App() {
   const [calcMemo, setCalcMemo] = useState(calcMemoInitial)
   const [output, setOutput] = useState('')
 
+  const stateHandler = ([output, memo]) => {
+    output != null && setOutput(output)
+    memo != null && setCalcMemo(memo)
+  }
+
+  const operations = {
+    reset: () => ['', calcMemoInitial],
+    del: () => [
+      output.slice(0, -1),
+      {
+        ...calcMemo,
+        [calcMemo.operator ? 'num2' : 'num1']: output.slice(0, -1),
+      },
+    ],
+    '=': () => [calculation(calcMemo).toString(), {
+        ...calcMemoInitial,
+        num1: calculation(calcMemo).toString(),
+      }],
+  }
+
   const buttonHandler = (target) => {
     if (typeof target === 'number') {
       if (calcMemo.operator && !calcMemo.num2) {
         setOutput(target.toString())
       } else {
-        setOutput(output.concat(target))
+        setOutput(output + target)
       }
       setCalcMemo({
         ...calcMemo,
         [calcMemo.operator ? 'num2' : 'num1']: calcMemo.operator
-          ? calcMemo.num2.concat(target)
-          : calcMemo.num1.concat(target),
+          ? calcMemo.num2 + target
+          : calcMemo.num1 + target,
       })
     } else {
-      switch (target) {
-        case 'reset':
-          setCalcMemo(calcMemoInitial)
-          setOutput('')
-          break
-        case 'del':
-          setOutput(output.slice(0, -1))
-          setCalcMemo({
-            ...calcMemo,
-            [calcMemo.operator ? 'num2' : 'num1']: output.slice(0, -1),
-          })
-          break
-        case '=':
-          setOutput(calculation(calcMemo).toString())
-          setCalcMemo({
-            ...calcMemoInitial,
-            num1: calculation(calcMemo).toString(),
-          })
-          break
-        default:
-          setCalcMemo({ ...calcMemo, operator: target })
+      if (target in operations) {
+        stateHandler(operations[target]())
+      } else {
+        setCalcMemo({ ...calcMemo, operator: target })
       }
     }
   }
