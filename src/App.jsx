@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useState } from 'react'
 import './App.css'
 import Button from './components/Button'
@@ -27,7 +28,13 @@ const calculation = ({ num1, num2, operator }) => {
 function App() {
   const [calcMemo, setCalcMemo] = useState(calcMemoInitial)
   const [output, setOutput] = useState('')
-  //currentFillNum = calcMemo.operator ? 'num2' : 'num1'
+  const currentFillNum = calcMemo.operator ? 'num2' : 'num1'
+
+  useEffect(() => {
+    const memo = { ...calcMemo, [currentFillNum]: output }
+    stateHandler([null, memo])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [output])
 
   const stateHandler = ([output, memo]) => {
     output != null && setOutput(output)
@@ -36,17 +43,8 @@ function App() {
 
   const operations = {
     reset: () => ['', calcMemoInitial],
-    del: () => [
-      output.slice(0, -1),
-      {
-        ...calcMemo,
-        [calcMemo.operator ? 'num2' : 'num1']: output.slice(0, -1),
-      },
-    ],
-    '=': () => [calculation(calcMemo).toString(), {
-        ...calcMemoInitial,
-        num1: calculation(calcMemo).toString(),
-      }],
+    del: () => [output.slice(0, -1), null],
+    '=': () => [calculation(calcMemo).toString(), calcMemoInitial],
   }
 
   const buttonHandler = (target) => {
@@ -56,13 +54,6 @@ function App() {
       } else {
         setOutput(output + target)
       }
-      setCalcMemo({
-        ...calcMemo,
-        [calcMemo.operator ? 'num2' : 'num1']: calcMemo.operator
-          ? calcMemo.num2 + target
-          : calcMemo.num1 + target,
-          //calcMemo.[calcMemo.operator ? 'num2' : 'num1']+target
-      })
     } else {
       if (target in operations) {
         stateHandler(operations[target]())
@@ -71,6 +62,7 @@ function App() {
       }
     }
   }
+
   return (
     <div>
       <div>
