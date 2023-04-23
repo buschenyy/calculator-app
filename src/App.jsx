@@ -27,6 +27,7 @@ const calculation = ({ num1, num2, operator }) => {
 function App() {
   const [calcMemo, setCalcMemo] = useState(calcMemoInitial)
   const [output, setOutput] = useState('')
+  //currentFillNum = calcMemo.operator ? 'num2' : 'num1'
 
   const stateHandler = ([output, memo]) => {
     output != null && setOutput(output)
@@ -60,6 +61,7 @@ function App() {
         [calcMemo.operator ? 'num2' : 'num1']: calcMemo.operator
           ? calcMemo.num2 + target
           : calcMemo.num1 + target,
+          //calcMemo.[calcMemo.operator ? 'num2' : 'num1']+target
       })
     } else {
       if (target in operations) {
