@@ -1,18 +1,51 @@
-import { useEffect } from 'react'
-import { useState } from 'react'
+import { useReducer } from 'react'
 import './App.css'
 import Button from './components/Button'
-const operators = ['.', '/', 'x', '-', '+', 'del', 'reset', '=']
-const buttons = Array.from({ length: 10 }, (_, i) => i).concat(operators)
-const calcMemoInitial = {
-  num1: '',
+import { operationButtons } from './data/operButtons'
+
+const calcMemoInit = {
+  operand1: '',
   operator: '',
-  num2: '',
+  operand2: '',
+  calculated: false,
 }
 
-const calculation = ({ num1, num2, operator }) => {
-  const a = parseInt(num1)
-  const b = parseInt(num2)
+function reducer(state, action) {
+  const { operator, calculated } = state
+  const { type, value } = action
+  const currentOperand = operator ? 'operand2' : 'operand1'
+  switch (type) {
+    case 'updateValue':
+      if (calculated) {
+        return {
+          ...state,
+          [currentOperand]: value.toString(),
+          calculated: false,
+        }
+      }
+
+      return {
+        ...state,
+        [currentOperand]: state[currentOperand] + value,
+      }
+    case 'setOperator':
+      return { ...state, operator: value }
+    case 'delDigit':
+      return { ...state, [currentOperand]: '' }
+    case 'resetValues':
+      return { ...calcMemoInit }
+    case 'calcResult':
+      return {
+        ...calcMemoInit,
+        operand1: calculate(state).toString(),
+        calculated: true,
+      }
+  }
+}
+
+const calculate = ({ operand1, operand2, operator }) => {
+  const a = parseInt(operand1)
+  const b = parseInt(operand2)
   switch (operator) {
     case '/':
       return a / b
@@ -26,42 +59,9 @@ const calculation = ({ num1, num2, operator }) => {
 }
 
 function App() {
-  const [calcMemo, setCalcMemo] = useState(calcMemoInitial)
-  const [output, setOutput] = useState('')
-  const currentFillNum = calcMemo.operator ? 'num2' : 'num1'
-
-  useEffect(() => {
-    const memo = { ...calcMemo, [currentFillNum]: output }
-    stateHandler([null, memo])
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [output])
-
-  const stateHandler = ([output, memo]) => {
-    output != null && setOutput(output)
-    memo != null && setCalcMemo(memo)
-  }
-
-  const operations = {
-    reset: () => ['', calcMemoInitial],
-    del: () => [output.slice(0, -1), null],
-    '=': () => [calculation(calcMemo).toString(), calcMemoInitial],
-  }
-
-  const buttonHandler = (target) => {
-    if (typeof target === 'number') {
-      if (calcMemo.operator && !calcMemo.num2) {
-        setOutput(target.toString())
-      } else {
-        setOutput(output + target)
-      }
-    } else {
-      if (target in operations) {
-        stateHandler(operations[target]())
-      } else {
-        setCalcMemo({ ...calcMemo, operator: target })
-      }
-    }
-  }
+  const [calcState, dispatch] = useReducer(reducer, calcMemoInit)
+  const currentOperand =
+    calcState.operator && calcState.operand2 ? 'operand2' : 'operand1'
 
   return (
     <div>
@@ -69,13 +69,13 @@ function App() {
         <span>calc</span>
         <span>theme</span>
       </div>
-      <div>{output}</div>
+      <div>{calcState[currentOperand]}</div>
       <div className="operationPad">
-        {buttons.map((digit, i) => (
+        {operationButtons.map(({ value, action }, i) => (
           <Button
             key={`btn${i}`}
-            onClick={() => buttonHandler(digit)}
-            digit={digit}
+            onClick={() => dispatch({ value, type: action })}
+            digit={value}
             i={i}
           />
         ))}
