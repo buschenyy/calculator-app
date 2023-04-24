@@ -1,0 +1,64 @@
+import { calculate, isFloat } from '.'
+
+export function reducer(state, action) {
+  const { type, value, payload } = action
+  const currentOperand = state.operator ? 'operand2' : 'operand1'
+  const {
+    calculated,
+    floatBuffer,
+    [currentOperand]: currentOperandValue,
+  } = state
+  switch (type) {
+    case 'updateValue':
+      if (floatBuffer) {
+        if (floatBuffer.endsWith('.') && floatBuffer.length > 1) {
+          return {
+            ...state,
+            floatBuffer: '',
+            [currentOperand]: parseFloat(floatBuffer + value),
+          }
+        }
+        return {
+          ...state,
+          floatBuffer: floatBuffer + value,
+          [currentOperand]: parseFloat(floatBuffer + value),
+        }
+      }
+
+      if (calculated) {
+        return {
+          ...state,
+          [currentOperand]: value,
+          calculated: false,
+        }
+      }
+      return {
+        ...state,
+        [currentOperand]:
+          currentOperandValue !== null
+            ? parseFloat(`${state[currentOperand]}${value}`)
+            : value,
+      }
+    case 'setFloat':
+      if (isFloat(currentOperandValue)) return { ...state }
+
+      return {
+        ...state,
+        floatBuffer: currentOperandValue + '.',
+        [currentOperand]: null,
+      }
+
+    case 'setOperator':
+      return { ...state, operator: value }
+    case 'delDigit':
+      return { ...state, [currentOperand]: null }
+    case 'resetValues':
+      return { ...payload }
+    case 'calcResult':
+      return {
+        ...payload,
+        operand1: calculate(state),
+        calculated: true,
+      }
+  }
+}
