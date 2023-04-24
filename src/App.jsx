@@ -9,29 +9,32 @@ const calcMemoInit = {
   operand1: null,
   operator: null,
   operand2: null,
-  floatStorage: '',
+  floatBuffer: '',
   calculated: false,
 }
 
 function reducer(state, action) {
-  const { operator, calculated, floatStorage } = state
   const { type, value } = action
-  const currentOperand = operator ? 'operand2' : 'operand1'
+  const currentOperand = state.operator ? 'operand2' : 'operand1'
+  const {
+    calculated,
+    floatBuffer,
+    [currentOperand]: currentOperandValue,
+  } = state
   switch (type) {
     case 'updateValue':
-      if (floatStorage) {
-        if (floatStorage.endsWith('.') && floatStorage.length > 1) {
+      if (floatBuffer) {
+        if (floatBuffer.endsWith('.') && floatBuffer.length > 1) {
           return {
             ...state,
-            ['floatStorage']: '',
-            [currentOperand]: parseFloat(floatStorage + value),
+            floatBuffer: '',
+            [currentOperand]: parseFloat(floatBuffer + value),
           }
         }
-        console.log('upd')
         return {
           ...state,
-          ['floatStorage']: floatStorage + value,
-          [currentOperand]: parseFloat(floatStorage + value),
+          floatBuffer: floatBuffer + value,
+          [currentOperand]: parseFloat(floatBuffer + value),
         }
       }
 
@@ -45,19 +48,19 @@ function reducer(state, action) {
       return {
         ...state,
         [currentOperand]:
-          state[currentOperand] != null
-            ? parseFloat(state[currentOperand].toString() + value)
+          currentOperandValue !== null
+            ? parseFloat(`${state[currentOperand]}${value}`)
             : value,
       }
     case 'setFloat':
-      if (!isFloat(state[currentOperand])) {
-        return {
-          ...state,
-          floatStorage: state[currentOperand] + '.',
-          [currentOperand]: null,
-        }
+      if (isFloat(currentOperandValue)) return { ...state }
+
+      return {
+        ...state,
+        floatBuffer: currentOperandValue + '.',
+        [currentOperand]: null,
       }
-      return { ...state }
+
     case 'setOperator':
       return { ...state, operator: value }
     case 'delDigit':
@@ -98,8 +101,8 @@ function App() {
         <span>theme</span>
       </div>
       <div>
-        {calcState.floatStorage
-          ? calcState.floatStorage
+        {calcState.floatBuffer
+          ? calcState.floatBuffer
           : calcState[currentOperand]}
       </div>
       <div className="operationPad">
