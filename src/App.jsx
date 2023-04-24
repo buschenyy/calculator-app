@@ -4,9 +4,9 @@ import Button from './components/Button'
 import { operationButtons } from './data/operButtons'
 
 const calcMemoInit = {
-  operand1: '',
-  operator: '',
-  operand2: '',
+  operand1: null,
+  operator: null,
+  operand2: null,
   calculated: false,
 }
 
@@ -19,42 +19,43 @@ function reducer(state, action) {
       if (calculated) {
         return {
           ...state,
-          [currentOperand]: value.toString(),
+          [currentOperand]: value,
           calculated: false,
         }
       }
 
       return {
         ...state,
-        [currentOperand]: state[currentOperand] + value,
+        [currentOperand]:
+          state[currentOperand] != null
+            ? parseFloat(state[currentOperand].toString() + value)
+            : value,
       }
     case 'setOperator':
       return { ...state, operator: value }
     case 'delDigit':
-      return { ...state, [currentOperand]: '' }
+      return { ...state, [currentOperand]: null }
     case 'resetValues':
       return { ...calcMemoInit }
     case 'calcResult':
       return {
         ...calcMemoInit,
-        operand1: calculate(state).toString(),
+        operand1: calculate(state),
         calculated: true,
       }
   }
 }
 
 const calculate = ({ operand1, operand2, operator }) => {
-  const a = parseInt(operand1)
-  const b = parseInt(operand2)
   switch (operator) {
     case '/':
-      return a / b
+      return operand1 / operand2
     case 'x':
-      return a * b
+      return operand1 * operand2
     case '-':
-      return a - b
+      return operand1 - operand2
     case '+':
-      return a + b
+      return operand1 + operand2
   }
 }
 
