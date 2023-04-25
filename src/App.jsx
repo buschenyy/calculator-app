@@ -20,7 +20,7 @@ function App() {
 
   if (calcState.floatBuffer) {
     displayValue = calcState.floatBuffer
-  } else if (displayValue?.toString().length > 9) {
+  } else if (displayValue?.toString().replace(/\D+/g, '').length > 9) {
     displayValue = displayValue.toExponential(0)
   }
 

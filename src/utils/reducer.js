@@ -4,6 +4,10 @@ export function reducer(state, action) {
   const currOperand = operator && operand1 ? 'operand2' : 'operand1'
   const filledRequiredValues = operand1 && operand2 && operator
   const { calculated, floatBuffer, [currOperand]: currOperandVal } = state
+  const isNotValidValLength = (value) =>
+    value?.toString().replace(/\D+/g, '').length >= 9
+  const isInputNotAllowed =
+    isNotValidValLength(currOperandVal) || isNotValidValLength(floatBuffer)
 
   const isFloat = (n) => Number(n) === n && n % 1 !== 0
 
@@ -61,7 +65,10 @@ export function reducer(state, action) {
 
   switch (type) {
     case 'updateValue':
-      return updateHandler()
+      if (!isInputNotAllowed || calculated) {
+        return updateHandler()
+      }
+      return { ...state }
 
     case 'setFloat':
       if (calculated || isFloat(currOperandVal)) return { ...state }
