@@ -45,6 +45,7 @@
   display: grid;
   grid-template: repeat(5, auto);
   gap: 10px 10px;
+  user-select: none;
 }
 
 .btn1 {
