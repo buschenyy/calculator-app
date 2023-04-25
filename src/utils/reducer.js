@@ -1,5 +1,15 @@
 import { calculate, isFloat } from '.'
 
+const floatBufferHandler = (state, buffer, operand, value) => {
+  const isFilledDecimal = buffer.endsWith('.') && buffer.length > 1
+
+  return {
+    ...state,
+    [operand]: parseFloat(buffer + value),
+    floatBuffer: isFilledDecimal ? '' : buffer + value,
+  }
+}
+
 export function reducer(state, action) {
   const { type, value, payload } = action
   const currentOperand = state.operator ? 'operand2' : 'operand1'
@@ -11,18 +21,7 @@ export function reducer(state, action) {
   switch (type) {
     case 'updateValue':
       if (floatBuffer) {
-        if (floatBuffer.endsWith('.') && floatBuffer.length > 1) {
-          return {
-            ...state,
-            floatBuffer: '',
-            [currentOperand]: parseFloat(floatBuffer + value),
-          }
-        }
-        return {
-          ...state,
-          floatBuffer: floatBuffer + value,
-          [currentOperand]: parseFloat(floatBuffer + value),
-        }
+        return floatBufferHandler(state, floatBuffer, currentOperand, value)
       }
 
       if (calculated) {
@@ -32,6 +31,7 @@ export function reducer(state, action) {
           calculated: false,
         }
       }
+      console.log(`${state[currentOperand]}${value}`)
       return {
         ...state,
         [currentOperand]:
