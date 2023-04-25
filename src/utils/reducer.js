@@ -14,57 +14,58 @@ const floatBufferHandler = (state, buffer, operand, value) => {
 
 export function reducer(state, action) {
   const { type, value, payload } = action
-  const currentOperand =
-    state.operator && state.operand1 ? 'operand2' : 'operand1'
-  const {
-    calculated,
-    floatBuffer,
-    [currentOperand]: currentOperandValue,
-  } = state
+  const { operator, operand1, operand2 } = state
+  const currOperand = operator && operand1 ? 'operand2' : 'operand1'
+  const filledRequiredValues = operand1 && operand2 && operator
+  const { calculated, floatBuffer, [currOperand]: currOperandVal } = state
+
   switch (type) {
     case 'updateValue':
       if (floatBuffer) {
-        return floatBufferHandler(state, floatBuffer, currentOperand, value)
+        return floatBufferHandler(state, floatBuffer, currOperand, value)
       }
 
-      if (isFloat(currentOperandValue) && value === 0) {
+      if (isFloat(currOperandVal) && value === 0) {
         return {
           ...state,
-          floatBuffer: `${currentOperandValue}${value}`,
-          [currentOperand]: null,
+          floatBuffer: `${currOperandVal}${value}`,
+          [currOperand]: null,
         }
       }
 
       if (calculated) {
         return {
           ...state,
-          [currentOperand]: value,
+          [currOperand]: value,
           calculated: false,
         }
       }
       return {
         ...state,
-        [currentOperand]:
-          currentOperandValue !== null
-            ? parseFloat(`${state[currentOperand]}${value}`)
+        [currOperand]:
+          currOperandVal !== null
+            ? parseFloat(`${state[currOperand]}${value}`)
             : value,
       }
     case 'setFloat':
-      if (isFloat(currentOperandValue)) return { ...state }
+      if (calculated) return { ...state }
+
+      if (isFloat(currOperandVal)) return { ...state }
 
       return {
         ...state,
-        floatBuffer: currentOperandValue + '.',
-        [currentOperand]: null,
+        floatBuffer: currOperandVal + '.',
+        [currOperand]: null,
       }
 
     case 'setOperator':
       return { ...state, operator: value }
     case 'delDigit':
-      return { ...state, [currentOperand]: null }
+      return { ...state, [currOperand]: null }
     case 'resetValues':
       return { ...payload }
     case 'calcResult':
+      if (!filledRequiredValues) return { ...state }
       return {
         ...payload,
         operand1: calculate(state),
