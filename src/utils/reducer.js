@@ -1,17 +1,3 @@
-import { calculate, isFloat } from '.'
-
-const floatBufferHandler = (state, buffer, operand, value) => {
-  const isFilledDecimal =
-    (buffer.endsWith('.') || value !== 0 || buffer.length <= 1) &&
-    !(buffer.endsWith('.') && value === 0)
-
-  return {
-    ...state,
-    [operand]: parseFloat(buffer + value),
-    floatBuffer: isFilledDecimal ? '' : buffer + value,
-  }
-}
-
 export function reducer(state, action) {
   const { type, value, payload } = action
   const { operator, operand1, operand2 } = state
@@ -19,38 +5,74 @@ export function reducer(state, action) {
   const filledRequiredValues = operand1 && operand2 && operator
   const { calculated, floatBuffer, [currOperand]: currOperandVal } = state
 
+  const isFloat = (n) => Number(n) === n && n % 1 !== 0
+
+  const getResult = ({ operand1, operand2, operator }) => {
+    switch (operator) {
+      case '/':
+        return operand1 / operand2
+      case 'x':
+        return operand1 * operand2
+      case '-':
+        return operand1 - operand2
+      case '+':
+        return operand1 + operand2
+    }
+  }
+  function updateHandler() {
+    if (floatBuffer) {
+      return floatBufferHandler()
+    }
+
+    if (isFloat(currOperandVal) && value === 0) {
+      return {
+        ...state,
+        floatBuffer: `${currOperandVal}${value}`,
+        [currOperand]: null,
+      }
+    }
+
+    if (calculated) {
+      return {
+        ...state,
+        [currOperand]: value,
+        calculated: false,
+      }
+    }
+    return {
+      ...state,
+      [currOperand]:
+        currOperandVal !== null
+          ? parseFloat(`${state[currOperand]}${value}`)
+          : value,
+    }
+  }
+
+  function floatBufferHandler() {
+    const isFilledDecimal =
+      (floatBuffer.endsWith('.') || value !== 0 || floatBuffer.length <= 1) &&
+      !(floatBuffer.endsWith('.') && value === 0)
+    return {
+      ...state,
+      [currOperand]: parseFloat(floatBuffer + value),
+      floatBuffer: isFilledDecimal ? '' : floatBuffer + value,
+    }
+  }
+
   switch (type) {
     case 'updateValue':
-      if (floatBuffer) {
-        return floatBufferHandler(state, floatBuffer, currOperand, value)
-      }
+      return updateHandler()
 
-      if (isFloat(currOperandVal) && value === 0) {
+    case 'setFloat':
+      if (calculated || isFloat(currOperandVal)) return { ...state }
+
+      if (!currOperandVal) {
         return {
           ...state,
-          floatBuffer: `${currOperandVal}${value}`,
+          floatBuffer: `0.`,
           [currOperand]: null,
         }
       }
-
-      if (calculated) {
-        return {
-          ...state,
-          [currOperand]: value,
-          calculated: false,
-        }
-      }
-      return {
-        ...state,
-        [currOperand]:
-          currOperandVal !== null
-            ? parseFloat(`${state[currOperand]}${value}`)
-            : value,
-      }
-    case 'setFloat':
-      if (calculated) return { ...state }
-
-      if (isFloat(currOperandVal)) return { ...state }
 
       return {
         ...state,
@@ -61,14 +83,14 @@ export function reducer(state, action) {
     case 'setOperator':
       return { ...state, operator: value }
     case 'delDigit':
-      return { ...state, [currOperand]: null }
+      return { ...state, [currOperand]: null, floatBuffer: '' }
     case 'resetValues':
       return { ...payload }
     case 'calcResult':
       if (!filledRequiredValues) return { ...state }
       return {
         ...payload,
-        operand1: calculate(state),
+        operand1: getResult(state),
         calculated: true,
       }
   }
