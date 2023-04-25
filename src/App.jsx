@@ -16,17 +16,21 @@ function App() {
   const currentOperand =
     calcState.operator && calcState.operand2 !== null ? 'operand2' : 'operand1'
 
+  let displayValue = calcState[currentOperand]
+
+  if (calcState.floatBuffer) {
+    displayValue = calcState.floatBuffer
+  } else if (displayValue?.toString().length > 9) {
+    displayValue = displayValue.toExponential(0)
+  }
+
   return (
     <div>
       <div>
         <span>calc</span>
         <span>theme</span>
       </div>
-      <div>
-        {calcState.floatBuffer
-          ? calcState.floatBuffer
-          : calcState[currentOperand]}
-      </div>
+      <div>{displayValue}</div>
       <div className="operationPad">
         {operationButtons.map(({ value, action }, i) => (
           <Button
