@@ -18,12 +18,19 @@ function App() {
 
   let displayValue = calcState[currentOperand]
 
+  // If there is a float buffer, display it
   if (calcState.floatBuffer) {
     displayValue = calcState.floatBuffer
-  } else if (displayValue?.toString().replace(/\D+/g, '').length > 9) {
+  }
+  // If the value is a decimal and the calculation has been completed, round it to 9 decimal places
+  else if (!Number.isInteger(displayValue) && calcState.calculated) {
+    const integerLength = Math.round(displayValue).toString().length
+    displayValue = displayValue?.toFixed(9 - integerLength)
+  }
+  // If the value has more than 9 digits, display it in scientific notation
+  else if (displayValue?.toString().replace(/\D+/g, '').length > 9) {
     displayValue = displayValue.toExponential(0)
   }
-
   return (
     <div>
       <div>
