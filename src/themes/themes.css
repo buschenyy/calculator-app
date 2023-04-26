@@ -1,7 +1,7 @@
 .darkBlue.display {
   background: hsl(224, 36%, 15%);
 }
-.darkBlue.toggle,
+.darkBlue.switch,
 .darkBlue.operationPad {
   background: hsl(223, 31%, 20%);
   color: hsl(221, 14%, 31%);
@@ -11,7 +11,27 @@
   color: hsl(0, 0%, 100%);
 }
 
-.darkBlue.toggleSlider {
+input[type='range'].darkBlue.switch::-webkit-slider-runnable-track {
+  background: #232c43;
+  border: 4.6px solid #232c43;
+}
+input[type='range'].darkBlue.switch::-webkit-slider-thumb {
+  background: #d03f2f;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+input[type='range'].darkBlue.switch:focus::-webkit-slider-runnable-track {
+  background: #2c3754;
+}
+input[type='range'].darkBlue.switch::-moz-range-track {
+  background: #232c43;
+  border: 4.6px solid #232c43;
+}
+input[type='range'].darkBlue.switch::-moz-range-thumb {
+  background: #d03f2f;
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.darkBlue.switchSlider {
   background: hsl(6, 63%, 50%);
   box-shadow: hsl(6, 70%, 34%) 0px 5px;
 }
@@ -29,7 +49,7 @@
 .lightGray.display {
   background: hsl(0, 0%, 93%);
 }
-.lightGray.toggle,
+.lightGray.switch,
 .lightGray.operationPad {
   background: rgb(209, 204, 204);
 }
@@ -38,7 +58,27 @@
   color: rgb(53, 53, 44);
 }
 
-.lightGray.toggleSlider {
+input[type='range'].lightGray.switch::-webkit-slider-runnable-track {
+  background: rgb(209, 204, 204);
+  border: 4.6px solid rgb(209, 204, 204);
+}
+input[type='range'].lightGray.switch::-webkit-slider-thumb {
+  background: rgb(202, 85, 2);
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+input[type='range'].lightGray.switch:focus::-webkit-slider-runnable-track {
+  background: rgb(216, 215, 215);
+}
+input[type='range'].lightGray.switch::-moz-range-track {
+  background: rgb(209, 204, 204);
+  border: 4.6px solid rgb(209, 204, 204);
+}
+input[type='range'].lightGray.switch::-moz-range-thumb {
+  background: rgb(202, 85, 2);
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.lightGray.switchSlider {
   background: hsl(25, 98%, 40%);
   box-shadow: hsl(25, 99%, 27%) 0px 5px;
 }
@@ -61,7 +101,7 @@
 }
 
 .darkViolet.display,
-.darkViolet.toggle,
+.darkViolet.switch,
 .darkViolet.operationPad {
   background: hsl(268, 71%, 12%);
 }
@@ -71,7 +111,27 @@
   color: hsl(52, 100%, 62%);
 }
 
-.darkViolet.toggleSlider {
+input[type='range'].darkViolet.switch::-webkit-slider-runnable-track {
+  background: rgb(29, 9, 52);
+  border: 4.6px solid rgb(29, 9, 52);
+}
+input[type='range'].darkViolet.switch::-webkit-slider-thumb {
+  background: rgb(0, 224, 209);
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+input[type='range'].darkViolet.switch:focus::-webkit-slider-runnable-track {
+  background: rgb(52, 28, 79);
+}
+input[type='range'].darkViolet.switch::-moz-range-track {
+  background: rgb(29, 9, 52);
+  border: 4.6px solid rgb(29, 9, 52);
+}
+input[type='range'].darkViolet.switch::-moz-range-thumb {
+  background: rgb(0, 224, 209);
+  border: 1px solid rgba(0, 0, 0, 0);
+}
+
+.darkViolet.brigthButton {
   background: hsl(176, 100%, 44%);
   box-shadow: hsl(177, 92%, 70%) 0px 5px;
 }

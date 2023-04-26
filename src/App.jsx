@@ -4,6 +4,7 @@ import './themes/themes.css'
 import Button from './components/Button'
 import { operationButtons } from './data/operButtons'
 import { reducer } from './utils/reducer'
+import ThemeSwitch from './components/ThemeSwitch'
 const calcMemoInit = {
   operand1: null,
   operator: null,
@@ -13,14 +14,12 @@ const calcMemoInit = {
 }
 
 function App() {
-  const [theme, setTheme] = useState('lightGray')
+  const [theme, setTheme] = useState('darkBlue')
   const [calcState, dispatch] = useReducer(reducer, calcMemoInit)
   const currentOperand =
     calcState.operator && calcState.operand2 !== null ? 'operand2' : 'operand1'
 
   let displayValue = calcState[currentOperand]
-
-  const toggleTheme = () => {}
 
   // If there is a float buffer, display it
   if (calcState.floatBuffer) {
@@ -47,7 +46,11 @@ function App() {
     <div className={`App ${theme}`}>
       <div className={`header ${theme}`}>
         <span className={`title ${theme}`}>calc</span>
-        <span>theme</span>
+        <ThemeSwitch
+          theme={theme}
+          setTheme={setTheme}
+          className={`switch ${theme}`}
+        />
       </div>
       <div className={`display ${theme}`}>{displayValue}</div>
       <div className={`operationPad ${theme}`}>
