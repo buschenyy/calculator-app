@@ -1,5 +1,6 @@
-import { useReducer } from 'react'
+import { useReducer, useState } from 'react'
 import './App.css'
+import './themes/themes.css'
 import Button from './components/Button'
 import { operationButtons } from './data/operButtons'
 import { reducer } from './utils/reducer'
@@ -12,11 +13,14 @@ const calcMemoInit = {
 }
 
 function App() {
+  const [theme, setTheme] = useState('lightGray')
   const [calcState, dispatch] = useReducer(reducer, calcMemoInit)
   const currentOperand =
     calcState.operator && calcState.operand2 !== null ? 'operand2' : 'operand1'
 
   let displayValue = calcState[currentOperand]
+
+  const toggleTheme = () => {}
 
   // If there is a float buffer, display it
   if (calcState.floatBuffer) {
@@ -40,13 +44,13 @@ function App() {
     displayValue = '0'
   }
   return (
-    <div className="App">
-      <div className="header">
-        <span className="title">calc</span>
+    <div className={`App ${theme}`}>
+      <div className={`header ${theme}`}>
+        <span className={`title ${theme}`}>calc</span>
         <span>theme</span>
       </div>
-      <div className="display">{displayValue}</div>
-      <div className="operationPad">
+      <div className={`display ${theme}`}>{displayValue}</div>
+      <div className={`operationPad ${theme}`}>
         {operationButtons.map(({ value, action }, i) => (
           <Button
             key={`btn${i}`}
@@ -54,6 +58,7 @@ function App() {
               dispatch({ value, type: action, payload: calcMemoInit })
             }
             value={value}
+            theme={theme}
             i={i}
           />
         ))}

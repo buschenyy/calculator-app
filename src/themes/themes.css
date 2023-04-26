@@ -1,0 +1,88 @@
+.darkBlue.display {
+  background: hsl(224, 36%, 15%);
+}
+.darkBlue.toggle,
+.darkBlue.operationPad {
+  background: hsl(223, 31%, 20%);
+  color: hsl(221, 14%, 31%);
+}
+.darkBlue.App {
+  background: rgb(58, 71, 100);
+  color: hsl(0, 0%, 100%);
+}
+
+.darkBlue.toggleSlider {
+  background: hsl(6, 63%, 50%);
+  box-shadow: hsl(6, 70%, 34%) 0px 5px;
+}
+
+.darkBlue.button {
+  background: hsl(0, 0%, 100%);
+  box-shadow: hsl(28, 16%, 65%) 0px 5px;
+}
+
+.darkBlue.button {
+  background: hsl(225, 21%, 49%);
+  box-shadow: hsl(224, 28%, 35%) 0px 5px;
+}
+
+.lightGray.display {
+  background: hsl(0, 0%, 93%);
+}
+.lightGray.toggle,
+.lightGray.operationPad {
+  background: rgb(209, 204, 204);
+}
+.lightGray.App {
+  background: rgb(230, 230, 230);
+  color: rgb(53, 53, 44);
+}
+
+.lightGray.toggleSlider {
+  background: hsl(25, 98%, 40%);
+  box-shadow: hsl(25, 99%, 27%) 0px 5px;
+}
+
+.lightGray.textDark {
+  color: hsl(60, 10%, 19%);
+}
+.lightGray.textLight {
+  color: hsl(0, 0%, 100%);
+}
+
+.lightGray.button {
+  background: hsl(45, 7%, 89%);
+  box-shadow: hsl(45, 7%, 89%) 0px 5px;
+}
+
+.lightGray.button {
+  background: hsl(185, 42%, 37%);
+  box-shadow: hsl(185, 58%, 25%) 0px 5px;
+}
+
+.darkViolet.display,
+.darkViolet.toggle,
+.darkViolet.operationPad {
+  background: hsl(268, 71%, 12%);
+}
+
+.darkViolet.App {
+  background: rgb(22, 6, 40);
+  color: hsl(52, 100%, 62%);
+}
+
+.darkViolet.toggleSlider {
+  background: hsl(176, 100%, 44%);
+  box-shadow: hsl(177, 92%, 70%) 0px 5px;
+}
+
+.darkViolet.buttonDark {
+  color: hsl(52, 100%, 62%);
+  background: hsl(268, 47%, 21%);
+  box-shadow: hsl(290, 70%, 36%) 0px 5px;
+}
+
+.darkViolet.button {
+  background: hsl(281, 89%, 26%);
+  box-shadow: hsl(285, 91%, 52%) 0px 5px;
+}
