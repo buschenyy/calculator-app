@@ -23,13 +23,21 @@ function App() {
     displayValue = calcState.floatBuffer
   }
   // If the value is a decimal and the calculation has been completed, round it to 9 decimal places
-  else if (!Number.isInteger(displayValue) && calcState.calculated) {
+  else if (
+    !Number.isInteger(displayValue) &&
+    calcState.calculated &&
+    displayValue?.toString().replace(/\D+/g, '').length > 9
+  ) {
     const integerLength = Math.round(displayValue).toString().length
     displayValue = displayValue?.toFixed(9 - integerLength)
   }
   // If the value has more than 9 digits, display it in scientific notation
   else if (displayValue?.toString().replace(/\D+/g, '').length > 9) {
     displayValue = displayValue.toExponential(0)
+  }
+  //If there is no value, output 0
+  else if (displayValue === null) {
+    displayValue = '0'
   }
   return (
     <div className="App">
@@ -45,7 +53,7 @@ function App() {
             onClick={() =>
               dispatch({ value, type: action, payload: calcMemoInit })
             }
-            digit={value}
+            value={value}
             i={i}
           />
         ))}

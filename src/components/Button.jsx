@@ -1,7 +1,8 @@
-const Button = ({ digit, i, onClick }) => {
+const Button = ({ value, i, onClick }) => {
+  const valueForDisplay = value !== 'result' ? value : '='
   return (
     <button className={`btn${i + 1}`} onClick={onClick}>
-      {digit}
+      {valueForDisplay}
     </button>
   )
 }
