@@ -31,9 +31,10 @@ input[type='range'].darkBlue.switch::-moz-range-thumb {
   border: 1px solid rgba(0, 0, 0, 0);
 }
 
-.darkBlue.switchSlider {
+.darkBlue.brightButton {
   background: hsl(6, 63%, 50%);
   box-shadow: hsl(6, 70%, 34%) 0px 5px;
+  color: rgb(255, 255, 255);
 }
 
 .darkBlue.button {
@@ -41,9 +42,11 @@ input[type='range'].darkBlue.switch::-moz-range-thumb {
   box-shadow: hsl(28, 16%, 65%) 0px 5px;
 }
 
-.darkBlue.button {
+.darkBlue.darkButton {
   background: hsl(225, 21%, 49%);
   box-shadow: hsl(224, 28%, 35%) 0px 5px;
+  color: rgb(255, 255, 255);
+  text-transform: uppercase;
 }
 
 .lightGray.display {
@@ -78,26 +81,27 @@ input[type='range'].lightGray.switch::-moz-range-thumb {
   border: 1px solid rgba(0, 0, 0, 0);
 }
 
-.lightGray.switchSlider {
+.lightGray.brightButton {
   background: hsl(25, 98%, 40%);
   box-shadow: hsl(25, 99%, 27%) 0px 5px;
+  color: rgb(255, 255, 255);
 }
 
 .lightGray.textDark {
   color: hsl(60, 10%, 19%);
 }
-.lightGray.textLight {
-  color: hsl(0, 0%, 100%);
-}
 
 .lightGray.button {
   background: hsl(45, 7%, 89%);
-  box-shadow: hsl(45, 7%, 89%) 0px 5px;
+  box-shadow: rgb(166 157 145) 0px 5px;
+  color: hsl(60, 10%, 19%);
 }
 
-.lightGray.button {
+.lightGray.darkButton {
   background: hsl(185, 42%, 37%);
   box-shadow: hsl(185, 58%, 25%) 0px 5px;
+  color: rgb(255, 255, 255);
+  text-transform: uppercase;
 }
 
 .darkViolet.display,
@@ -131,18 +135,21 @@ input[type='range'].darkViolet.switch::-moz-range-thumb {
   border: 1px solid rgba(0, 0, 0, 0);
 }
 
-.darkViolet.brigthButton {
+.darkViolet.brightButton {
   background: hsl(176, 100%, 44%);
   box-shadow: hsl(177, 92%, 70%) 0px 5px;
+  color: rgb(255, 255, 255);
 }
 
-.darkViolet.buttonDark {
+.darkViolet.button {
   color: hsl(52, 100%, 62%);
   background: hsl(268, 47%, 21%);
   box-shadow: hsl(290, 70%, 36%) 0px 5px;
 }
 
-.darkViolet.button {
+.darkViolet.darkButton {
   background: hsl(281, 89%, 26%);
   box-shadow: hsl(285, 91%, 52%) 0px 5px;
+  color: rgb(255, 255, 255);
+  text-transform: uppercase;
 }
