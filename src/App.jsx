@@ -32,12 +32,12 @@ function App() {
     displayValue = displayValue.toExponential(0)
   }
   return (
-    <div>
-      <div>
-        <span>calc</span>
+    <div className="App">
+      <div className="header">
+        <span className="title">calc</span>
         <span>theme</span>
       </div>
-      <div>{displayValue}</div>
+      <div className="display">{displayValue}</div>
       <div className="operationPad">
         {operationButtons.map(({ value, action }, i) => (
           <Button
