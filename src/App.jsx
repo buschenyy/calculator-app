@@ -1,6 +1,6 @@
 import { useReducer, useState } from 'react'
 import './App.css'
-import './themes/themes.css'
+import './themes/index.css'
 import Button from './components/Button'
 import { operationButtons } from './data/operButtons'
 import { reducer } from './utils/reducer'
@@ -44,16 +44,12 @@ function App() {
   }
   return (
     <div className={`App ${theme}`}>
-      <div className={`header ${theme}`}>
-        <span className={`title ${theme}`}>calc</span>
-        <ThemeSwitch
-          theme={theme}
-          setTheme={setTheme}
-          className={`switch ${theme}`}
-        />
+      <div className={`header`}>
+        <span className={`title`}>calc</span>
+        <ThemeSwitch theme={theme} setTheme={setTheme} className={`switch`} />
       </div>
-      <div className={`display ${theme}`}>{displayValue}</div>
-      <div className={`operationPad ${theme}`}>
+      <div className={`display`}>{displayValue}</div>
+      <div className={`operationPad`}>
         {operationButtons.map(({ value, action }, i) => (
           <Button
             key={`btn${i}`}
@@ -61,7 +57,6 @@ function App() {
               dispatch({ value, type: action, payload: calcMemoInit })
             }
             value={value}
-            theme={theme}
             i={i}
           />
         ))}

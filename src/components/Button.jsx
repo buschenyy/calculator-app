@@ -1,15 +1,14 @@
 import cn from 'classnames/bind'
 
-const Button = ({ value, i, theme, onClick }) => {
+const Button = ({ value, i, onClick }) => {
   const valueForDisplay = value !== 'result' ? value : '='
   const classNames = {
-    button: value !== 'reset' && value !== 'del' && value !== 'result',
-    darkButton: value === 'reset' || value === 'del',
-    brightButton: value === 'result',
+    specOpButton: value === 'reset' || value === 'del',
+    resultButton: value === 'result',
   }
 
   return (
-    <button className={cn(`btn${i + 1}`, theme, classNames)} onClick={onClick}>
+    <button className={cn(`btn${i + 1}`, classNames)} onClick={onClick}>
       {valueForDisplay}
     </button>
   )

@@ -4,6 +4,10 @@
   --main-width: 460px;
   --main-mobile-width: 370px;
   --screen-height: 100px;
+  --dark-slate-blue: #3a4764;
+  --white: #ffffff;
+  --blue-whale: var(--blue-whale);
+  --oxford-blue: #182034;
 }
 
 .App {
@@ -13,8 +17,8 @@
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background: rgb(58, 71, 100);
-  color: rgb(255, 255, 255);
+  background: var(--dark-slate-blue);
+  color: var(--white);
 }
 
 .header {
@@ -40,8 +44,8 @@ input[type='range'].switch:focus {
   outline: none;
 }
 input[type='range'].switch::-webkit-slider-runnable-track {
-  background: #232c43;
-  border: 4.6px solid #232c43;
+  background: var(--blue-whale);
+  border: 4.6px solid var(--blue-whale);
   border-radius: 25px;
   width: 75px;
   height: 25px;
@@ -61,8 +65,8 @@ input[type='range'].switch:focus::-webkit-slider-runnable-track {
   background: #2c3754;
 }
 input[type='range'].switch::-moz-range-track {
-  background: #232c43;
-  border: 4.6px solid #232c43;
+  background: var(--blue-whale);
+  border: 4.6px solid var(--blue-whale);
   border-radius: 25px;
   width: 75px;
   height: 25px;
@@ -87,12 +91,12 @@ input[type='range'].switch::-ms-track {
 }
 input[type='range'].switch::-ms-fill-lower {
   background: #1a2132;
-  border: 4.6px solid #232c43;
+  border: 4.6px solid var(--blue-whale);
   border-radius: 50px;
 }
 input[type='range'].switch::-ms-fill-upper {
-  background: #232c43;
-  border: 4.6px solid #232c43;
+  background: var(--blue-whale);
+  border: 4.6px solid var(--blue-whale);
   border-radius: 50px;
 }
 input[type='range'].switch::-ms-thumb {
@@ -106,7 +110,7 @@ input[type='range'].switch::-ms-thumb {
   /*Needed to keep the Edge thumb centred*/
 }
 input[type='range'].switch:focus::-ms-fill-lower {
-  background: #232c43;
+  background: var(--blue-whale);
 }
 input[type='range'].switch:focus::-ms-fill-upper {
   background: #2c3754;
@@ -140,7 +144,7 @@ input[type='range'].switch:focus::-ms-fill-upper {
 .operationPad button {
   box-shadow: rgb(180 165 151) 0px 5px;
   color: rgb(68, 75, 90);
-  background: rgb(255, 255, 255);
+  background: var(--white);
   cursor: pointer;
   border-radius: 8px;
   width: 100%;
@@ -156,6 +160,10 @@ input[type='range'].switch:focus::-ms-fill-upper {
   transition: all 0.1s;
   box-shadow: rgb(180 165 151) 0px 2px;
   align-self: end;
+}
+
+.specOpButton {
+  text-transform: uppercase;
 }
 
 .btn1 {
