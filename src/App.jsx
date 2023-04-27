@@ -29,7 +29,8 @@ function App() {
   else if (
     !Number.isInteger(displayValue) &&
     calcState.calculated &&
-    displayValue?.toString().replace(/\D+/g, '').length > 9
+    displayValue?.toString().replace(/\D+/g, '').length > 9 &&
+    Math.round(displayValue).toString().length < 9
   ) {
     const integerLength = Math.round(displayValue).toString().length
     displayValue = displayValue?.toFixed(9 - integerLength)

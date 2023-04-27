@@ -1,1 +1,0 @@
-Uncaught RangeError: toFixed() digits argument must be between 0 and 100

@@ -1,7 +1,7 @@
 export function reducer(state, action) {
   const { type, value, payload } = action
   const { operator, operand1, operand2 } = state
-  const currOperand = operator && operand1 ? 'operand2' : 'operand1'
+  const currOperand = operator && operand1 !== null ? 'operand2' : 'operand1'
   const filledRequiredValues =
     operand1 !== null && operand2 !== null && operator
   const { calculated, floatBuffer, [currOperand]: currOperandVal } = state
@@ -75,6 +75,23 @@ export function reducer(state, action) {
         }
       }
 
+      if (operator && floatBuffer.endsWith('.') && currOperand !== 'operand2') {
+        return {
+          ...state,
+          operand1: Number(floatBuffer),
+          operand2: value,
+          floatBuffer: '',
+        }
+      }
+
+      if (operator && operand1 === null) {
+        return {
+          ...state,
+          operand1: 0,
+          operand2: value,
+        }
+      }
+
       if (!isInputNotAllowed || calculated) {
         return updateHandler()
       }
@@ -104,7 +121,10 @@ export function reducer(state, action) {
     case 'resetValues':
       return { ...payload }
     case 'calcResult':
-      if (currOperand === 'operand2' && floatBuffer.endsWith('0')) {
+      if (
+        (currOperand === 'operand2' && floatBuffer.endsWith('0')) ||
+        floatBuffer.endsWith('.')
+      ) {
         return {
           ...payload,
           operand1: getResult({
