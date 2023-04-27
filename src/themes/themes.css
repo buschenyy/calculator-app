@@ -36,10 +36,16 @@ input[type='range'].darkBlue.switch::-moz-range-thumb {
   box-shadow: hsl(6, 70%, 34%) 0px 5px;
   color: rgb(255, 255, 255);
 }
+.darkBlue.brightButton:active {
+  box-shadow: hsl(6, 70%, 34%) 0px 2px;
+}
 
 .darkBlue.button {
   background: hsl(0, 0%, 100%);
   box-shadow: hsl(28, 16%, 65%) 0px 5px;
+}
+.darkBlue.button:active {
+  box-shadow: hsl(28, 16%, 65%) 0px 2px;
 }
 
 .darkBlue.darkButton {
@@ -47,6 +53,10 @@ input[type='range'].darkBlue.switch::-moz-range-thumb {
   box-shadow: hsl(224, 28%, 35%) 0px 5px;
   color: rgb(255, 255, 255);
   text-transform: uppercase;
+}
+
+.darkBlue.darkButton:active {
+  box-shadow: hsl(224, 28%, 35%) 0px 2px;
 }
 
 .lightGray.display {
@@ -86,6 +96,9 @@ input[type='range'].lightGray.switch::-moz-range-thumb {
   box-shadow: hsl(25, 99%, 27%) 0px 5px;
   color: rgb(255, 255, 255);
 }
+.lightGray.brightButton:active {
+  box-shadow: hsl(25, 99%, 27%) 0px 2px;
+}
 
 .lightGray.textDark {
   color: hsl(60, 10%, 19%);
@@ -96,12 +109,18 @@ input[type='range'].lightGray.switch::-moz-range-thumb {
   box-shadow: rgb(166 157 145) 0px 5px;
   color: hsl(60, 10%, 19%);
 }
+.lightGray.button:active {
+  box-shadow: rgb(166 157 145) 0px 2px;
+}
 
 .lightGray.darkButton {
   background: hsl(185, 42%, 37%);
   box-shadow: hsl(185, 58%, 25%) 0px 5px;
   color: rgb(255, 255, 255);
   text-transform: uppercase;
+}
+.lightGray.darkButton:active {
+  box-shadow: hsl(185, 58%, 25%) 0px 2px;
 }
 
 .darkViolet.display,
@@ -140,11 +159,17 @@ input[type='range'].darkViolet.switch::-moz-range-thumb {
   box-shadow: hsl(177, 92%, 70%) 0px 5px;
   color: rgb(255, 255, 255);
 }
+.darkViolet.brightButton:active {
+  box-shadow: hsl(177, 92%, 70%) 0px 2px;
+}
 
 .darkViolet.button {
   color: hsl(52, 100%, 62%);
   background: hsl(268, 47%, 21%);
   box-shadow: hsl(290, 70%, 36%) 0px 5px;
+}
+.darkViolet.button:active {
+  box-shadow: hsl(290, 70%, 36%) 0px 2px;
 }
 
 .darkViolet.darkButton {
@@ -152,4 +177,7 @@ input[type='range'].darkViolet.switch::-moz-range-thumb {
   box-shadow: hsl(285, 91%, 52%) 0px 5px;
   color: rgb(255, 255, 255);
   text-transform: uppercase;
+}
+.darkViolet.darkButton:active {
+  box-shadow: hsl(285, 91%, 52%) 0px 2px;
 }

@@ -127,11 +127,11 @@ input[type='range'].switch:focus::-ms-fill-upper {
 
 .operationPad {
   display: grid;
-  grid-template: repeat(5, auto) / repeat(4, 1fr);
+  grid-template: repeat(5, 55px) / repeat(4, 1fr);
   margin-top: 25px;
   padding: 1em;
   border-radius: 10px;
-  gap: 1em;
+  gap: 0.7em 1em;
   width: var(--main-width);
   background: rgb(35, 44, 67);
   user-select: none;
@@ -149,6 +149,13 @@ input[type='range'].switch:focus::-ms-fill-upper {
   font-size: 22px;
   font-weight: 700;
   border: none;
+}
+
+.operationPad button:active {
+  height: 48px;
+  transition: all 0.1s;
+  box-shadow: rgb(180 165 151) 0px 2px;
+  align-self: end;
 }
 
 .btn1 {
