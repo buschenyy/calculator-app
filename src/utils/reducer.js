@@ -16,13 +16,20 @@ export function reducer(state, action) {
       // Если оператор установлен:
       if (operator) {
         // Если первый операнд равен null:
-        if (operand1 === null) {
+        if (isNaN(operand1) || operand1 === 0) {
           // Если float-буфер заканчивается на '0':
           if (floatBuffer.endsWith('0')) {
             // Сохраняем значение из буфера как первый операнд и устанавливаем значение value как второй операнд:
             return {
               ...state,
-              [currOperand]: parseFloat(floatBuffer),
+              operand1: parseFloat(floatBuffer),
+              operand2: value,
+              floatBuffer: '',
+            }
+          } else if (floatBuffer.endsWith('.')) {
+            return {
+              ...state,
+              operand1: parseFloat(floatBuffer.slice(0, -1)),
               operand2: value,
               floatBuffer: '',
             }
@@ -130,20 +137,16 @@ export function reducer(state, action) {
 
   function setFloatHandler() {
     // Если результат уже вычислен или текущий операнд уже имеет дробную часть, то ничего не делаем.
-    if (
-      calculated ||
-      isFloat(currOperandVal) ||
-      floatBuffer ||
-      isInputNotAllowed
-    )
+    if (isFloat(currOperandVal) || floatBuffer || isInputNotAllowed)
       return { ...state }
 
     // Если текущий операнд равен null, то устанавливаем 0. как значение буфера.
-    if (currOperandVal === null) {
+    if (currOperandVal === null || calculated) {
       return {
         ...state,
         floatBuffer: `0.`,
         [currOperand]: parseFloat(floatBuffer),
+        calculated: false,
       }
     }
 
