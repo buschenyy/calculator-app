@@ -1,8 +1,13 @@
 export function reducer(state, action) {
   const { type, value, payload } = action
-  const { operator, operand1, operand2 } = state
-  const currOperand = operator && operand1 !== null ? 'operand2' : 'operand1'
-  const { calculated, floatBuffer, [currOperand]: currOperandVal } = state
+  // const { operator, operand1, operand2 } = state
+  const currOperand = state.operator ? 'operand2' : 'operand1'
+  const {
+    operator,
+    operand2,
+    floatBuffer,
+    [currOperand]: currOperandVal,
+  } = state
 
   const isFloat = (n) => Number(n) === n && n % 1 !== 0
   const isNotValidValLength = (value) =>
@@ -11,80 +16,79 @@ export function reducer(state, action) {
     isNotValidValLength(currOperandVal) || isNotValidValLength(floatBuffer)
 
   function updateHandler() {
-    // Если введенное значение допустимо и результат еще не вычислен, то вызываем updateHandler() для обновления значения операндов.
-    if (!isInputNotAllowed || calculated) {
-      // Если оператор установлен:
-      if (operator) {
-        // Если первый операнд равен null:
-        if (isNaN(operand1) || operand1 === 0) {
-          // Если float-буфер заканчивается на '0':
-          if (floatBuffer.endsWith('0')) {
-            // Сохраняем значение из буфера как первый операнд и устанавливаем значение value как второй операнд:
-            return {
-              ...state,
-              operand1: parseFloat(floatBuffer),
-              operand2: value,
-              floatBuffer: '',
-            }
-          } else if (floatBuffer.endsWith('.')) {
-            return {
-              ...state,
-              operand1: parseFloat(floatBuffer.slice(0, -1)),
-              operand2: value,
-              floatBuffer: '',
-            }
-          } else {
-            // Устанавливаем 0 как первый операнд и значение value как второй операнд:
-            return {
-              ...state,
-              operand1: 0,
-              operand2: value,
-            }
-          }
-        }
-        // Если float-буфер заканчивается на '.' и текущий операнд не является вторым операндом:
-        else if (floatBuffer.endsWith('.') && currOperand !== 'operand2') {
+    const { operand1, calculated, floatBuffer } = state
+
+    if (isInputNotAllowed && !calculated) return { ...state }
+
+    // Если оператор установлен:
+    if (operator) {
+      // Если первый операнд равен null:
+      if (isNaN(operand1) || operand1 === 0) {
+        // Если float-буфер заканчивается на '0':
+        if (floatBuffer.endsWith('0')) {
           // Сохраняем значение из буфера как первый операнд и устанавливаем значение value как второй операнд:
           return {
             ...state,
-            operand1: Number(floatBuffer),
+            operand1: parseFloat(floatBuffer),
             operand2: value,
             floatBuffer: '',
           }
+        } else if (floatBuffer.endsWith('.')) {
+          return {
+            ...state,
+            operand1: parseFloat(floatBuffer.slice(0, -1)),
+            operand2: value,
+            floatBuffer: '',
+          }
+        } else {
+          // Устанавливаем 0 как первый операнд и значение value как второй операнд:
+          return {
+            ...state,
+            operand1: 0,
+            operand2: value,
+          }
         }
       }
-
-      // Если есть float-буфер, то вызываем floatBufferHandler():
-      if (floatBuffer) {
-        return floatBufferHandler()
-      }
-
-      // Если был выполнен предыдущий расчет или текущее значение операнда является числом с плавающей точкой и значение равно 0:
-      if (calculated || (isFloat(currOperandVal) && value === 0)) {
-        // Устанавливаем новое значение текущего операнда и сбрасываем флаг выполненного расчета; если текущее значение операнда является числом с плавающей точкой и значение равно 0, то устанавливаем float-буфер:
+      // Если float-буфер заканчивается на '.' и текущий операнд не является вторым операндом:
+      else if (floatBuffer.endsWith('.') && currOperand !== 'operand2') {
+        // Сохраняем значение из буфера как первый операнд и устанавливаем значение value как второй операнд:
         return {
           ...state,
-          [currOperand]: value,
-          calculated: false,
-          floatBuffer:
-            isFloat(currOperandVal) && value === 0
-              ? `${currOperandVal}${value}`
-              : '',
+          operand1: Number(floatBuffer),
+          operand2: value,
+          floatBuffer: '',
         }
       }
+    }
 
-      // Если текущее значение операнда не является null, то добавляем новое значение к существующему, иначе устанавливаем новое значение в качестве значения текущего операнда:
-      const newValue =
-        currOperandVal !== null
-          ? parseFloat(`${state[currOperand]}${value}`)
-          : value
+    // Если есть float-буфер, то вызываем floatBufferHandler():
+    if (floatBuffer) {
+      return floatBufferHandler()
+    }
+
+    // Если был выполнен предыдущий расчет или текущее значение операнда является числом с плавающей точкой и значение равно 0:
+    if (calculated || (isFloat(currOperandVal) && value === 0)) {
+      // Устанавливаем новое значение текущего операнда и сбрасываем флаг выполненного расчета; если текущее значение операнда является числом с плавающей точкой и значение равно 0, то устанавливаем float-буфер:
       return {
         ...state,
-        [currOperand]: newValue,
+        [currOperand]: value,
+        calculated: false,
+        floatBuffer:
+          isFloat(currOperandVal) && value === 0 && !isInputNotAllowed
+            ? `${currOperandVal}${value}`
+            : '',
       }
     }
-    // В остальных случаях возвращаем текущее состояние.
-    return { ...state }
+
+    // Если текущее значение операнда не является null, то добавляем новое значение к существующему, иначе устанавливаем новое значение в качестве значения текущего операнда:
+    const newValue =
+      currOperandVal !== null
+        ? parseFloat(`${state[currOperand]}${value}`)
+        : value
+    return {
+      ...state,
+      [currOperand]: newValue,
+    }
   }
 
   function floatBufferHandler() {
@@ -141,7 +145,7 @@ export function reducer(state, action) {
       return { ...state }
 
     // Если текущий операнд равен null, то устанавливаем 0. как значение буфера.
-    if (currOperandVal === null || calculated) {
+    if (currOperandVal === null || state.calculated) {
       return {
         ...state,
         floatBuffer: `0.`,
