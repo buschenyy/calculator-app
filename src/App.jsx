@@ -6,7 +6,7 @@ import { operationButtons } from './data/operButtons'
 import { reducer } from './utils/reducer'
 import ThemeSwitch from './components/ThemeSwitch'
 const calcMemoInit = {
-  operand1: null,
+  operand1: 0,
   operator: null,
   operand2: null,
   floatBuffer: '',
@@ -20,10 +20,11 @@ function App() {
     calcState.operator && calcState.operand2 !== null ? 'operand2' : 'operand1'
 
   let displayValue = calcState[currentOperand]
-
   // If there is a float buffer, display it
   if (calcState.floatBuffer) {
     displayValue = calcState.floatBuffer
+  } else if (isNaN(displayValue)) {
+    displayValue = 'Error'
   }
   // If the value is a decimal and the calculation has been completed, round it to 9 decimal places
   else if (

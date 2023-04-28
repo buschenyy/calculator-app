@@ -5,12 +5,12 @@ export function reducer(state, action) {
   const { calculated, floatBuffer, [currOperand]: currOperandVal } = state
 
   const isFloat = (n) => Number(n) === n && n % 1 !== 0
+  const isNotValidValLength = (value) =>
+    value?.toString().replace(/\D+/g, '').length >= 9
+  const isInputNotAllowed =
+    isNotValidValLength(currOperandVal) || isNotValidValLength(floatBuffer)
 
   function updateHandler() {
-    const isNotValidValLength = (value) =>
-      value?.toString().replace(/\D+/g, '').length >= 9
-    const isInputNotAllowed =
-      isNotValidValLength(currOperandVal) || isNotValidValLength(floatBuffer)
     // Если введенное значение допустимо и результат еще не вычислен, то вызываем updateHandler() для обновления значения операндов.
     if (!isInputNotAllowed || calculated) {
       // Если оператор установлен:
@@ -118,8 +118,7 @@ export function reducer(state, action) {
         calculated: true,
       }
     }
-    const filledRequiredValues =
-      operand1 !== null && operand2 !== null && operator
+    const filledRequiredValues = operand2 !== null && operator
     if (!filledRequiredValues) return { ...state }
 
     return {
@@ -131,14 +130,20 @@ export function reducer(state, action) {
 
   function setFloatHandler() {
     // Если результат уже вычислен или текущий операнд уже имеет дробную часть, то ничего не делаем.
-    if (calculated || isFloat(currOperandVal)) return { ...state }
+    if (
+      calculated ||
+      isFloat(currOperandVal) ||
+      floatBuffer ||
+      isInputNotAllowed
+    )
+      return { ...state }
 
     // Если текущий операнд равен null, то устанавливаем 0. как значение буфера.
-    if (!currOperandVal) {
+    if (currOperandVal === null) {
       return {
         ...state,
         floatBuffer: `0.`,
-        [currOperand]: null,
+        [currOperand]: parseFloat(floatBuffer),
       }
     }
 
@@ -146,7 +151,7 @@ export function reducer(state, action) {
     return {
       ...state,
       floatBuffer: currOperandVal + '.',
-      [currOperand]: null,
+      [currOperand]: parseFloat(floatBuffer),
     }
   }
 
@@ -158,12 +163,15 @@ export function reducer(state, action) {
       return setFloatHandler()
 
     case 'setOperator':
+      if (operator && operand2 !== null) {
+        return { ...calcHandler(), operator: value }
+      }
       // Устанавливаем значение оператора.
       return { ...state, operator: value }
 
     case 'delDigit':
       // Удаляем последний символ из текущего операнда и буфера.
-      return { ...state, [currOperand]: null, floatBuffer: '' }
+      return { ...state, [currOperand]: payload[currOperand], floatBuffer: '' }
 
     case 'resetValues':
       // Сбрасываем все значения до начальных.
