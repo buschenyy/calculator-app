@@ -29,14 +29,14 @@ export function reducer(state, action) {
           // Сохраняем значение из буфера как первый операнд и устанавливаем значение value как второй операнд:
           return {
             ...state,
-            operand1: parseFloat(floatBuffer),
+            operand1: Number(floatBuffer),
             operand2: value,
             floatBuffer: '',
           }
         } else if (floatBuffer.endsWith('.')) {
           return {
             ...state,
-            operand1: parseFloat(floatBuffer.slice(0, -1)),
+            operand1: Number(floatBuffer.slice(0, -1)),
             operand2: value,
             floatBuffer: '',
           }
@@ -82,9 +82,7 @@ export function reducer(state, action) {
 
     // Если текущее значение операнда не является null, то добавляем новое значение к существующему, иначе устанавливаем новое значение в качестве значения текущего операнда:
     const newValue =
-      currOperandVal !== null
-        ? parseFloat(`${state[currOperand]}${value}`)
-        : value
+      currOperandVal !== null ? Number(`${state[currOperand]}${value}`) : value
     return {
       ...state,
       [currOperand]: newValue,
@@ -93,11 +91,11 @@ export function reducer(state, action) {
 
   function floatBufferHandler() {
     const isFilledDecimal =
-      (floatBuffer.endsWith('.') || value !== 0 || floatBuffer.length <= 1) &&
-      !(floatBuffer.endsWith('.') && value === 0)
+      (floatBuffer.endsWith('.') || value) &&
+      !(floatBuffer.endsWith('.') && !value)
     return {
       ...state,
-      [currOperand]: parseFloat(floatBuffer + value),
+      [currOperand]: Number(floatBuffer + value),
       floatBuffer: isFilledDecimal ? '' : floatBuffer + value,
     }
   }
@@ -124,7 +122,7 @@ export function reducer(state, action) {
         ...payload,
         operand1: getResult({
           ...state,
-          operand2: parseFloat(floatBuffer),
+          operand2: Number(floatBuffer),
         }),
         calculated: true,
       }
@@ -149,7 +147,7 @@ export function reducer(state, action) {
       return {
         ...state,
         floatBuffer: `0.`,
-        [currOperand]: parseFloat(floatBuffer),
+        [currOperand]: Number(floatBuffer),
         calculated: false,
       }
     }
@@ -158,7 +156,7 @@ export function reducer(state, action) {
     return {
       ...state,
       floatBuffer: currOperandVal + '.',
-      [currOperand]: parseFloat(floatBuffer),
+      [currOperand]: Number(floatBuffer),
     }
   }
 
