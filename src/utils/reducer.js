@@ -4,16 +4,18 @@ export function reducer(state, action) {
 
   const isFloat = (n) => Number(n) === n && n % 1 !== 0
 
-  const getResult = ({ operand1, operand2, operator }) => {
+  const getResult = () => {
+    const a = Number(operand1)
+    const b = Number(operand2)
     switch (operator) {
       case '/':
-        return operand1 / operand2
+        return a / b
       case 'x':
-        return operand1 * operand2
+        return a * b
       case '-':
-        return operand1 - operand2
+        return a - b
       case '+':
-        return operand1 + operand2
+        return a + b
     }
   }
   function updateHandler() {}
@@ -25,8 +27,11 @@ export function reducer(state, action) {
     case 'setFloat':
     case 'setOperator':
       return { ...state, operator: value }
-    case 'delDigit':
+    case 'delValue':
+      return { ...state, [currentOperand]: '' }
     case 'resetValues':
+      return { ...payload }
     case 'calcResult':
+      return { ...payload, operand1: `${getResult()}`, calculated: true }
   }
 }

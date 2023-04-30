@@ -14,7 +14,7 @@ export const operationButtons = [
   { action: 'setOperator', value: 'x' },
   { action: 'setOperator', value: '-' },
   { action: 'setOperator', value: '+' },
-  { action: 'delDigit', value: 'del' },
+  { action: 'delValue', value: 'del' },
   { action: 'resetValues', value: 'reset' },
   { action: 'calcResult', value: 'result' },
 ]
