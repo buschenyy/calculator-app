@@ -5,6 +5,7 @@ import Button from './components/Button'
 import { operationButtons } from './data/operButtons'
 import { reducer } from './utils/reducer'
 import ThemeSwitch from './components/ThemeSwitch'
+const MAX_OPERAND_LENGTH = 9
 const calcMemoInit = {
   operand1: '',
   operator: '',
@@ -14,11 +15,32 @@ const calcMemoInit = {
 
 function App() {
   const [theme, setTheme] = useState('darkBlue')
-  const [calcState, dispatch] = useReducer(reducer, calcMemoInit)
-  const currentOperand = calcState.operator ? 'operand2' : 'operand1'
+  const [calc, dispatch] = useReducer(reducer, calcMemoInit)
+  const currentOperand = calc.operator ? 'operand2' : 'operand1'
 
   const onClickHandler = (action) => {
-    dispatch(action)
+    switch (action.type) {
+      case 'updateValue':
+        return updateValueHandler()
+      case 'setOperator':
+        return setOperatorHandler()
+      case 'calcResult':
+        return calcResultHandler()
+      default:
+        return dispatch(action)
+    }
+
+    function updateValueHandler() {
+      if (calc[currentOperand].length < MAX_OPERAND_LENGTH) dispatch(action)
+    }
+    function calcResultHandler(outsideAction = action) {
+      if (calc.operand1 && calc.operator && calc.operand2)
+        dispatch(outsideAction)
+    }
+    function setOperatorHandler() {
+      if (calc.operator) calcResultHandler({ ...action, type: 'calcResult' })
+      dispatch(action)
+    }
   }
 
   return (
@@ -28,9 +50,7 @@ function App() {
         <ThemeSwitch theme={theme} setTheme={setTheme} className={`switch`} />
       </div>
       <div className={`display`}>
-        {calcState[currentOperand] && calcState.operand2
-          ? calcState.operand2
-          : calcState.operand1}
+        {calc[currentOperand] && calc.operand2 ? calc.operand2 : calc.operand1}
       </div>
       <div className={`operationPad`}>
         {operationButtons.map(({ value, action }, i) => (
