@@ -69,6 +69,7 @@ function App() {
                 currentOperand,
                 type: action,
                 payload: calcMemoInit,
+                maxLength: MAX_OPERAND_LENGTH,
               })
             }
             value={value}
