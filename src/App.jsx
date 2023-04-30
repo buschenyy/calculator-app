@@ -7,7 +7,7 @@ import { reducer } from './utils/reducer'
 import ThemeSwitch from './components/ThemeSwitch'
 const MAX_OPERAND_LENGTH = 9
 const calcMemoInit = {
-  operand1: '',
+  operand1: '0',
   operator: '',
   operand2: '',
   calculated: false,
@@ -35,6 +35,9 @@ function App() {
       const maxLength = isDecimal ? MAX_OPERAND_LENGTH + 1 : MAX_OPERAND_LENGTH
       if (calc[currentOperand].length >= maxLength) return
       if (isDecimal && action.value === '.') return
+      if (calc[currentOperand] === '0' && !action.value) return
+      if (calc.calculated && !calc.operator)
+        dispatch({ ...action, type: 'resetValues' })
       dispatch(action)
     }
     function calcResultHandler(outsideAction = action) {
