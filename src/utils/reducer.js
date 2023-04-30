@@ -24,6 +24,7 @@ export function reducer(state, action) {
       return { ...state, [currentOperand]: currOpValue + value }
     case 'setFloat':
     case 'setOperator':
+      return { ...state, operator: value }
     case 'delDigit':
     case 'resetValues':
     case 'calcResult':

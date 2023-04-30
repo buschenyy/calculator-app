@@ -27,13 +27,22 @@ function App() {
         <span className={`title`}>calc</span>
         <ThemeSwitch theme={theme} setTheme={setTheme} className={`switch`} />
       </div>
-      <div className={`display`}>{calcState[currentOperand]}</div>
+      <div className={`display`}>
+        {calcState[currentOperand] && calcState.operand2
+          ? calcState.operand2
+          : calcState.operand1}
+      </div>
       <div className={`operationPad`}>
         {operationButtons.map(({ value, action }, i) => (
           <Button
             key={`btn${i}`}
             onClick={() =>
-              onClickHandler({ value, currentOperand, type: action, payload: calcMemoInit })
+              onClickHandler({
+                value,
+                currentOperand,
+                type: action,
+                payload: calcMemoInit,
+              })
             }
             value={value}
             i={i}
