@@ -9,7 +9,7 @@ export const operationButtons = [
   { action: 'updateValue', value: 7 },
   { action: 'updateValue', value: 8 },
   { action: 'updateValue', value: 9 },
-  { action: 'setFloat', value: '.' },
+  { action: 'updateValue', value: '.' },
   { action: 'setOperator', value: '/' },
   { action: 'setOperator', value: 'x' },
   { action: 'setOperator', value: '-' },

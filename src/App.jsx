@@ -31,7 +31,11 @@ function App() {
     }
 
     function updateValueHandler() {
-      if (calc[currentOperand].length < MAX_OPERAND_LENGTH) dispatch(action)
+      const isDecimal = calc[currentOperand].includes('.')
+      const maxLength = isDecimal ? MAX_OPERAND_LENGTH + 1 : MAX_OPERAND_LENGTH
+      if (calc[currentOperand].length >= maxLength) return
+      if (isDecimal && action.value === '.') return
+      dispatch(action)
     }
     function calcResultHandler(outsideAction = action) {
       if (calc.operand1 && calc.operator && calc.operand2)
