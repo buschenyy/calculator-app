@@ -18,7 +18,8 @@ export function reducer(state, action) {
   function updateHandler() {
     const { operand1, calculated, floatBuffer } = state
 
-    if (isInputNotAllowed && !calculated) return { ...state }
+    if (isInputNotAllowed && !calculated && currOperandVal !== null)
+      return { ...state }
 
     // Если оператор установлен:
     if (operator) {
@@ -50,11 +51,14 @@ export function reducer(state, action) {
         }
       }
       // Если float-буфер заканчивается на '.' и текущий операнд не является вторым операндом:
-      else if (floatBuffer.endsWith('.') && currOperand !== 'operand2') {
+      else if (
+        (floatBuffer.endsWith('.') && currOperand !== 'operand2') ||
+        (!floatBuffer.endsWith('.') && !operand2)
+      ) {
         // Сохраняем значение из буфера как первый операнд и устанавливаем значение value как второй операнд:
         return {
           ...state,
-          operand1: Number(floatBuffer),
+          operand1: floatBuffer ? Number(floatBuffer) : operand1,
           operand2: value,
           floatBuffer: '',
         }
@@ -71,7 +75,7 @@ export function reducer(state, action) {
       // Устанавливаем новое значение текущего операнда и сбрасываем флаг выполненного расчета; если текущее значение операнда является числом с плавающей точкой и значение равно 0, то устанавливаем float-буфер:
       return {
         ...state,
-        [currOperand]: value,
+        [currOperand]: Number(currOperandVal),
         calculated: false,
         floatBuffer:
           isFloat(currOperandVal) && value === 0 && !isInputNotAllowed
@@ -156,7 +160,6 @@ export function reducer(state, action) {
     return {
       ...state,
       floatBuffer: currOperandVal + '.',
-      [currOperand]: Number(floatBuffer),
     }
   }
 
