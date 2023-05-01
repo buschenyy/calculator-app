@@ -3,19 +3,27 @@ export function reducer(state, action) {
 
   switch (type) {
     case 'updateValue':
-      return { ...state, [currentOperand]: state[currentOperand] + action.value }
+      return { ...state, [currentOperand]: getCorrectPrevVal() + action.value }
     case 'setOperator':
       return { ...state, operator: action.value }
     case 'delValue':
-      return { ...state, [currentOperand]: '' }
+      return { ...state, [currentOperand]: '0' }
     case 'resetValues':
       return { ...action.payload }
     case 'calcResult':
       return { ...action.payload, operand1: getResult(), calculated: true }
   }
 
+  function getCorrectPrevVal() {
+    if (state[currentOperand] === '0' && action.value !== '.') return ''
+    if (!state[currentOperand] && action.value === '.') return '0'
+    return state[currentOperand]
+  }
+
   function getResult() {
     const result = calcResult()
+    // log
+    console.table({ ...state, result })
     const hasAllowableLength = result.toString().length <= action.maxLength
     if (hasAllowableLength) return `${result}`
 
