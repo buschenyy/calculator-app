@@ -27,11 +27,11 @@ export function reducer(state, action) {
     const hasAllowableLength = result.toString().length <= action.maxLength
     if (hasAllowableLength) return `${result}`
 
-    const isInteger = Number.isInteger(result)
-    const intLength = Math.round(result).toString().length
-    if (isInteger && !hasAllowableLength) return result.toPrecision(1)
-    if (!isInteger && !hasAllowableLength)
-      return result.toFixed(action.maxLength - intLength)
+    const intLength = Math.round(Math.abs(result)).toString().length
+    if (intLength > action.maxLength) return result.toPrecision(1)
+
+    if (!Number.isInteger(result))
+      return `${Number(result.toFixed(action.maxLength - intLength))}`
 
     return `${result}`
   }
