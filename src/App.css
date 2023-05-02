@@ -204,3 +204,11 @@ button.resultButton {
     width: var(--main-mobile-width);
   }
 }
+
+@media (max-width: 380px) {
+  .display,
+  .header,
+  .operationPad {
+    width: 90%;
+  }
+}
