@@ -14,9 +14,14 @@ body {
   display: flex;
   place-items: center;
   justify-content: center;
-  min-height: 100vh;
 }
 
 * {
   box-sizing: border-box;
+}
+
+@media (max-width: 500px) {
+  body {
+    overflow: hidden;
+  }
 }
