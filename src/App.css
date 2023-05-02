@@ -4,10 +4,6 @@
   --main-width: 460px;
   --main-mobile-width: 370px;
   --screen-height: 100px;
-  --dark-slate-blue: #3a4764;
-  --white: #ffffff;
-  --blue-whale: var(--blue-whale);
-  --oxford-blue: #182034;
   --anim: 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
@@ -22,8 +18,6 @@
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background: var(--dark-slate-blue);
-  color: var(--white);
 }
 
 .header {
@@ -69,10 +63,7 @@ input[type='range'].switch:focus {
 }
 input[type='range'].switch::-webkit-slider-runnable-track {
   transition: background-color var(--anim), border-color var(--anim);
-  background: var(--blue-whale);
-  border: 4.6px solid var(--blue-whale);
   border-radius: 25px;
-  width: 75px;
   height: 25px;
   cursor: pointer;
 }
@@ -81,22 +72,16 @@ input[type='range'].switch::-webkit-slider-thumb {
   margin-top: -1.1px;
   width: 18px;
   height: 18px;
-  background: #d03f2f;
-  border: 1px solid rgba(0, 0, 0, 0);
   border-radius: 50px;
   cursor: pointer;
   -webkit-appearance: none;
 }
 input[type='range'].switch:focus::-webkit-slider-runnable-track {
   transition: background-color var(--anim), border-color var(--anim);
-  background: #2c3754;
 }
 input[type='range'].switch::-moz-range-track {
   transition: background-color var(--anim), border-color var(--anim);
-  background: var(--blue-whale);
-  border: 4.6px solid var(--blue-whale);
   border-radius: 25px;
-  width: 75px;
   height: 25px;
   cursor: pointer;
 }
@@ -104,8 +89,6 @@ input[type='range'].switch::-moz-range-thumb {
   transition: background var(--anim);
   width: 18px;
   height: 18px;
-  background: #d03f2f;
-  border: 1px solid rgba(0, 0, 0, 0);
   border-radius: 50px;
   cursor: pointer;
 }
@@ -120,7 +103,6 @@ input[type='range'].switch::-moz-range-thumb {
   padding: 0.5em;
   font-size: 50px;
   font-weight: 700;
-  background: rgb(24, 32, 52);
 }
 
 .operationPad {
@@ -131,15 +113,11 @@ input[type='range'].switch::-moz-range-thumb {
   border-radius: 10px;
   gap: 0.7em 1em;
   width: var(--main-width);
-  background: rgb(35, 44, 67);
   user-select: none;
 }
 
 .operationPad button {
   transition: box-shadow var(--anim), background var(--anim);
-  box-shadow: rgb(180 165 151) 0px 5px;
-  color: rgb(68, 75, 90);
-  background: var(--white);
   cursor: pointer;
   border-radius: 8px;
   width: 100%;
@@ -153,7 +131,6 @@ input[type='range'].switch::-moz-range-thumb {
 .operationPad button:active {
   height: 48px;
   transition: all 0.1s;
-  box-shadow: rgb(180 165 151) 0px 2px;
   align-self: end;
 }
 
