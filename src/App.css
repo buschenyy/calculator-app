@@ -69,9 +69,8 @@ input[type='range'].switch::-webkit-slider-runnable-track {
 }
 input[type='range'].switch::-webkit-slider-thumb {
   transition: background var(--anim);
-  margin-top: -1.1px;
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
   border-radius: 50px;
   cursor: pointer;
   -webkit-appearance: none;
@@ -87,8 +86,8 @@ input[type='range'].switch::-moz-range-track {
 }
 input[type='range'].switch::-moz-range-thumb {
   transition: background var(--anim);
-  width: 18px;
-  height: 18px;
+  width: 17px;
+  height: 17px;
   border-radius: 50px;
   cursor: pointer;
 }
@@ -107,17 +106,18 @@ input[type='range'].switch::-moz-range-thumb {
 
 .operationPad {
   display: grid;
-  grid-template: repeat(5, 55px) / repeat(4, 1fr);
+  grid-template: repeat(5, 50px) / repeat(4, 1fr);
   margin-top: 25px;
   padding: 1em;
   border-radius: 10px;
-  gap: 0.7em 1em;
+  gap: 1em;
   width: var(--main-width);
   user-select: none;
 }
 
 .operationPad button {
-  transition: box-shadow var(--anim), background var(--anim);
+  transition: box-shadow-color var(--anim), box-shadow-x 0s, box-shadow-y 0s,
+    background var(--anim);
   font-family: 'League Spartan', sans-serif;
   padding-top: 0.2em;
   cursor: pointer;
@@ -131,9 +131,7 @@ input[type='range'].switch::-moz-range-thumb {
 }
 
 .operationPad button:active {
-  height: 48px;
-  transition: all 0.1s;
-  align-self: end;
+  transform: translateY(3px);
 }
 
 button.specOpButton,
