@@ -111,6 +111,7 @@ input[type='range'].switch {
   justify-self: center;
   font-size: 33px;
   font-weight: 700;
+  padding-inline: 0;
   border: none;
 }
 
