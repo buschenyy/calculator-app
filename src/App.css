@@ -31,6 +31,7 @@
 .title {
   font-size: 1.5em;
   font-weight: bold;
+  cursor: default;
 }
 
 .themeSwitch {
@@ -48,6 +49,7 @@
   justify-content: space-around;
   font-size: 0.9em;
   grid-area: 1 / 2 / 2 / 3;
+  cursor: default;
 }
 
 input[type='range'].switch {
@@ -57,39 +59,21 @@ input[type='range'].switch {
   appearance: none;
   grid-area: 2 / 2 / 3 / 3;
 }
-input[type='range'].switch:focus {
-  transition: background-color var(--anim), border-color var(--anim);
+.switch:focus {
   outline: none;
 }
-input[type='range'].switch::-webkit-slider-runnable-track {
+.switch::-webkit-slider-runnable-track {
   transition: background-color var(--anim), border-color var(--anim);
   border-radius: 25px;
   height: 25px;
   cursor: pointer;
 }
-input[type='range'].switch::-webkit-slider-thumb {
-  transition: background var(--anim);
+.switch::-webkit-slider-thumb {
   width: 17px;
   height: 17px;
-  border-radius: 50px;
-  cursor: pointer;
+  border-radius: 17px;
+  cursor: grab;
   -webkit-appearance: none;
-}
-input[type='range'].switch:focus::-webkit-slider-runnable-track {
-  transition: background-color var(--anim), border-color var(--anim);
-}
-input[type='range'].switch::-moz-range-track {
-  transition: background-color var(--anim), border-color var(--anim);
-  border-radius: 25px;
-  height: 25px;
-  cursor: pointer;
-}
-input[type='range'].switch::-moz-range-thumb {
-  transition: background var(--anim);
-  width: 17px;
-  height: 17px;
-  border-radius: 50px;
-  cursor: pointer;
 }
 
 .display {
