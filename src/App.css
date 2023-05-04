@@ -118,6 +118,9 @@ input[type='range'].switch {
 .operationPad button:active {
   transform: translateY(3px);
 }
+.operationPad button:hover {
+  filter: brightness(0.2);
+}
 
 button.specOpButton,
 button.resultButton {
