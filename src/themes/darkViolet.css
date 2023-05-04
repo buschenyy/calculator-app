@@ -50,7 +50,7 @@
 .darkViolet .resultButton {
   background: var(--dv-key-background-red);
   box-shadow: var(--dv-key-shadow-red) 0px 5px;
-  color: var(--dv-text-light);
+  color: var(--dv-text-dark);
 }
 .darkViolet .resultButton:active {
   box-shadow: var(--dv-key-shadow-red) 0px 2px;
@@ -58,6 +58,11 @@
 
 .darkViolet .textDark {
   color: var(--dv-text-dark);
+}
+
+.darkViolet button:hover,
+.darkViolet button.active {
+  filter: brightness(1.3);
 }
 
 .darkViolet button {

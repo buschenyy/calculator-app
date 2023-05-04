@@ -59,6 +59,11 @@
   color: var(--lg-text-dark);
 }
 
+.lightGray button:hover,
+.lightGray button.active {
+  filter: brightness(1.1);
+}
+
 .lightGray button {
   background: var(--lg-key-background-orange);
   box-shadow: var(--lg-key-shadow-orange) 0px 5px;

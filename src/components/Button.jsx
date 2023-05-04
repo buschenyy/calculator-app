@@ -1,10 +1,11 @@
 import cn from 'classnames/bind'
 
-const Button = ({ value, i, onClick }) => {
+const Button = ({ value, i, onClick, activeOperator }) => {
   const valueForDisplay = value !== 'result' ? value : '='
   const classNames = {
     specOpButton: value === 'reset' || value === 'del',
     resultButton: value === 'result',
+    active: value === activeOperator,
   }
 
   return (

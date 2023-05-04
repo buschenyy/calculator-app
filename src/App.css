@@ -76,6 +76,10 @@ input[type='range'].switch {
   -webkit-appearance: none;
 }
 
+.switch::-webkit-slider-thumb:hover {
+  filter: brightness(1.2);
+}
+
 .display {
   display: flex;
   justify-content: flex-end;
@@ -117,9 +121,6 @@ input[type='range'].switch {
 
 .operationPad button:active {
   transform: translateY(3px);
-}
-.operationPad button:hover {
-  filter: brightness(0.2);
 }
 
 button.specOpButton,

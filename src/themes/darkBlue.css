@@ -59,6 +59,11 @@
   color: var(--db-text-dark);
 }
 
+.darkBlue button:hover,
+.darkBlue button.active {
+  filter: brightness(1.2);
+}
+
 .darkBlue button {
   background: var(--db-key-background-orange);
   box-shadow: var(--db-key-shadow-orange) 0px 5px;

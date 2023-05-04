@@ -72,6 +72,7 @@ function App() {
                 maxLength: MAX_OPERAND_LENGTH,
               })
             }
+            activeOperator={calc.operator}
             value={value}
             i={i}
           />
