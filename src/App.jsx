@@ -45,8 +45,8 @@ function App() {
     function updateValueHandler() {
       const isDecimal = calc[currentOperand].includes('.')
       const maxLength = isDecimal ? MAX_OPERAND_LENGTH + 1 : MAX_OPERAND_LENGTH
-      if (calc[currentOperand].length >= maxLength) return
-      if (isDecimal && action.value === '.') return
+      if (calc[currentOperand].length >= maxLength && !calc.calculated) return
+      if (isDecimal && action.value === '.' && !calc.calculated) return
       if (calc[currentOperand] === '0' && !action.value) return
       if (calc.calculated && !calc.operator)
         dispatch({ ...action, type: 'resetValues' })

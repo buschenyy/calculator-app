@@ -5,7 +5,7 @@ export function reducer(state, action) {
     case 'updateValue':
       return { ...state, [currentOperand]: getCorrectPrevVal() + action.value }
     case 'setOperator':
-      return { ...state, operator: action.value }
+      return { ...state, operator: action.value, calculated: false }
     case 'delValue':
       return { ...state, [currentOperand]: '0' }
     case 'resetValues':
