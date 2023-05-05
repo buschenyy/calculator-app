@@ -14,12 +14,11 @@ const calcMemoInit = {
 }
 
 const getFormatNum = (num, separator = ' ') => {
-  const completeDecimal = !num.endsWith('.') ? '' : '.'
-  const sign = num.startsWith('-') ? '-' : ''
-  const [int, decimal = ''] = num.slice(sign.length).split('.')
+  const completeDecimal = num.endsWith('.') ? '.' : ''
+  const [int, decimal = ''] = num.split('.', 2)
   const formatInt = int.replace(/\B(?=(\d{3})+(?!\d))/g, separator)
 
-  return `${sign}${formatInt}${decimal ? `.${decimal}` : ''}${completeDecimal}`
+  return `${formatInt}${decimal ? `.${decimal}` : ''}${completeDecimal}`
 }
 
 function App() {
