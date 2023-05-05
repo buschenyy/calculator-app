@@ -13,10 +13,23 @@ const calcMemoInit = {
   calculated: false,
 }
 
+const getFormatNum = (num, separator = ' ') => {
+  const completeDecimal = !num.endsWith('.') ? '' : '.'
+  const sign = num.startsWith('-') ? '-' : ''
+  const [int, decimal = ''] = num.slice(sign.length).split('.')
+  const formatInt = int.replace(/\B(?=(\d{3})+(?!\d))/g, separator)
+
+  return `${sign}${formatInt}${decimal ? `.${decimal}` : ''}${completeDecimal}`
+}
+
 function App() {
   const [theme, setTheme] = useState('darkBlue')
   const [calc, dispatch] = useReducer(reducer, calcMemoInit)
   const currentOperand = calc.operator ? 'operand2' : 'operand1'
+
+  const displayValue = getFormatNum(
+    calc[currentOperand] && calc.operand2 ? calc.operand2 : calc.operand1
+  )
 
   const onClickHandler = (action) => {
     switch (action.type) {
@@ -56,9 +69,7 @@ function App() {
         <span className={`title`}>calc</span>
         <ThemeSwitch theme={theme} setTheme={setTheme} className={`switch`} />
       </div>
-      <div className={`display`}>
-        {calc[currentOperand] && calc.operand2 ? calc.operand2 : calc.operand1}
-      </div>
+      <div className={`display`}>{displayValue}</div>
       <div className={`operationPad`}>
         {operationButtons.map(({ value, action }, i) => (
           <Button
