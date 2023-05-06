@@ -1,22 +1,42 @@
 :root {
-  --db-background-main: hsl(222, 26%, 31%);
-  --db-background-toggle: hsl(223, 31%, 20%);
-  --db-background-screen: hsl(224, 36%, 15%);
+  --background-main: hsl(222, 26%, 31%);
+  --background-toggle: hsl(223, 31%, 20%);
+  --background-screen: hsl(224, 36%, 15%);
+  --focus-slider-track: #2c3754;
 
-  --db-key-background: hsl(225, 21%, 49%);
-  --db-key-shadow: hsl(224, 28%, 35%);
+  --key-background: hsl(225, 21%, 49%);
+  --key-shadow: hsl(224, 28%, 35%);
 
-  --db-key-background-red: hsl(6, 63%, 50%);
-  --db-key-shadow-red: hsl(6, 70%, 34%);
+  --key-background-red: hsl(6, 63%, 50%);
+  --key-shadow-red: hsl(6, 70%, 34%);
 
-  --db-key-background-orange: hsl(30, 25%, 89%);
-  --db-key-shadow-orange: hsl(28, 16%, 65%);
+  --key-background-orange: hsl(30, 25%, 89%);
+  --key-shadow-orange: hsl(28, 16%, 65%);
 
-  --db-text-dark: hsl(221, 14%, 31%);
-  --db-text-light: hsl(0, 0%, 100%);
+  --text-dark: hsl(221, 14%, 31%);
+  --text-light: hsl(0, 0%, 100%);
 }
 
-.darkBlue.App {
+.lightGray {
+  --background-main: hsl(0, 0%, 90%);
+  --background-toggle: hsl(0, 5%, 81%);
+  --background-screen: hsl(0, 0%, 93%);
+  --focus-slider-track: rgb(216, 215, 215);
+
+  --key-background: hsl(185, 42%, 37%);
+  --key-shadow: hsl(185, 58%, 25%);
+
+  --key-background-red: hsl(25, 98%, 40%);
+  --key-shadow-red: hsl(25, 99%, 27%);
+
+  --key-background-orange: hsl(45, 7%, 89%);
+  --key-shadow-orange: hsl(35, 11%, 61%);
+
+  --text-dark: hsl(60, 10%, 19%);
+  --text-light: hsl(0, 0%, 100%);
+}
+
+/* .darkBlue.App {
   background: var(--db-background-main);
   color: var(--db-text-light);
 }
@@ -80,4 +100,4 @@
 }
 .darkBlue .specOpButton:active {
   box-shadow: var(--db-key-shadow) 0px 2px;
-}
+} */

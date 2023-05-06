@@ -1,62 +1,83 @@
-:root {
-  --lg-background-main: hsl(0, 0%, 90%);
-  --lg-background-toggle: hsl(0, 5%, 81%);
-  --lg-background-screen: hsl(0, 0%, 93%);
+@media (prefers-color-scheme: light) {
+  :root {
+    --background-main: hsl(0, 0%, 90%);
+    --background-toggle: hsl(0, 5%, 81%);
+    --background-screen: hsl(0, 0%, 93%);
+    --focus-slider-track: rgb(216, 215, 215);
 
-  --lg-key-background: hsl(185, 42%, 37%);
-  --lg-key-shadow: hsl(185, 58%, 25%);
+    --key-background: hsl(185, 42%, 37%);
+    --key-shadow: hsl(185, 58%, 25%);
 
-  --lg-key-background-red: hsl(25, 98%, 40%);
-  --lg-key-shadow-red: hsl(25, 99%, 27%);
+    --key-background-red: hsl(25, 98%, 40%);
+    --key-shadow-red: hsl(25, 99%, 27%);
 
-  --lg-key-background-orange: hsl(45, 7%, 89%);
-  --lg-key-shadow-orange: hsl(35, 11%, 61%);
+    --key-background-orange: hsl(45, 7%, 89%);
+    --key-shadow-orange: hsl(35, 11%, 61%);
 
-  --lg-text-dark: hsl(60, 10%, 19%);
-  --lg-text-light: hsl(0, 0%, 100%);
+    --text-dark: hsl(60, 10%, 19%);
+    --text-light: hsl(0, 0%, 100%);
+  }
+  .darkBlue {
+    --background-main: hsl(222, 26%, 31%);
+    --background-toggle: hsl(223, 31%, 20%);
+    --background-screen: hsl(224, 36%, 15%);
+    --focus-slider-track: #2c3754;
+
+    --key-background: hsl(225, 21%, 49%);
+    --key-shadow: hsl(224, 28%, 35%);
+
+    --key-background-red: hsl(6, 63%, 50%);
+    --key-shadow-red: hsl(6, 70%, 34%);
+
+    --key-background-orange: hsl(30, 25%, 89%);
+    --key-shadow-orange: hsl(28, 16%, 65%);
+
+    --text-dark: hsl(221, 14%, 31%);
+    --text-light: hsl(0, 0%, 100%);
+  }
 }
 
-.lightGray.App {
-  background: var(--lg-background-main);
-  color: var(--lg-text-dark);
+/* .lightGray.App {
+  background: var(--background-main);
+  color: var(--text-dark);
 }
 .lightGray .display {
-  background: var(--lg-background-screen);
+  background: var(--background-screen);
 }
 .lightGray .switch,
 .lightGray .operationPad {
-  background: var(--lg-background-toggle);
+  background: var(--background-toggle);
 }
 
 .lightGray input[type='range'].switch::-webkit-slider-runnable-track {
-  background: var(--lg-background-toggle);
-  border: 4.6px solid var(--lg-background-toggle);
+  background: var(--background-toggle);
+  border: 4.6px solid var(--background-toggle);
 }
 .lightGray input[type='range'].switch::-webkit-slider-thumb {
-  background: var(--lg-key-background-red);
+  background: var(--key-background-red);
 }
 .lightGray input[type='range'].switch:focus::-webkit-slider-runnable-track {
   background: rgb(216, 215, 215);
 }
 .lightGray input[type='range'].switch::-moz-range-track {
-  background: var(--lg-background-toggle);
-  border: 4.6px solid var(--lg-background-toggle);
+  background: var(--background-toggle);
+  border: 4.6px solid var(--background-toggle);
 }
 .lightGray input[type='range'].switch::-moz-range-thumb {
-  background: var(--lg-key-background-red);
+  background: var(--key-background-red);
 }
 
 .lightGray .resultButton {
-  background: var(--lg-key-background-red);
-  box-shadow: var(--lg-key-shadow-red) 0px 5px;
-  color: var(--lg-text-light);
+  background: var(--key-background-red);
+  box-shadow: var(--key-shadow-red) 0px 5px;
+  color: var(--text-light);
 }
 .lightGray .resultButton:active {
-  box-shadow: var(--lg-key-shadow-red) 0px 2px;
+  box-shadow: var(--key-shadow-red) 0px 2px;
 }
 
 .lightGray .textDark {
-  color: var(--lg-text-dark);
+  color: var(--text-dark);
 }
 
 .lightGray button:hover,
@@ -65,19 +86,19 @@
 }
 
 .lightGray button {
-  background: var(--lg-key-background-orange);
-  box-shadow: var(--lg-key-shadow-orange) 0px 5px;
-  color: var(--lg-text-dark);
+  background: var(--key-background-orange);
+  box-shadow: var(--key-shadow-orange) 0px 5px;
+  color: var(--text-dark);
 }
 .lightGray button:active {
-  box-shadow: var(--lg-key-shadow-orange) 0px 2px;
+  box-shadow: var(--key-shadow-orange) 0px 2px;
 }
 
 .lightGray .specOpButton {
-  background: var(--lg-key-background);
-  box-shadow: var(--lg-key-shadow) 0px 5px;
-  color: var(--lg-text-light);
+  background: var(--key-background);
+  box-shadow: var(--key-shadow) 0px 5px;
+  color: var(--text-light);
 }
 .lightGray .specOpButton:active {
-  box-shadow: var(--lg-key-shadow) 0px 2px;
-}
+  box-shadow: var(--key-shadow) 0px 2px;
+} */

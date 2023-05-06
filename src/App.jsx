@@ -22,7 +22,7 @@ const getFormatNum = (num, separator = ' ') => {
 }
 
 function App() {
-  const [theme, setTheme] = useState('darkBlue')
+  const [theme, setTheme] = useState('')
   const [calc, dispatch] = useReducer(reducer, calcMemoInit)
   const currentOperand = calc.operator ? 'operand2' : 'operand1'
 

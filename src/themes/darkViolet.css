@@ -1,23 +1,24 @@
-:root {
-  --dv-background-main: hsl(268, 75%, 9%);
-  --dv-background-toggle: hsl(268, 71%, 12%);
-  --dv-background-screen: hsl(268, 71%, 12%);
+.darkViolet {
+  --background-main: hsl(268, 75%, 9%);
+  --background-toggle: hsl(268, 71%, 12%);
+  --background-screen: hsl(268, 71%, 12%);
+  --focus-slider-track: rgb(52, 28, 79);
 
-  --dv-key-background: hsl(281, 89%, 26%);
-  --dv-key-shadow: hsl(285, 91%, 52%);
+  --key-background: hsl(281, 89%, 26%);
+  --key-shadow: hsl(285, 91%, 52%);
 
-  --dv-key-background-red: hsl(176, 100%, 44%);
-  --dv-key-shadow-red: hsl(177, 92%, 70%);
+  --key-background-red: hsl(176, 100%, 44%);
+  --key-shadow-red: hsl(177, 92%, 70%);
 
-  --dv-key-background-orange: hsl(268, 47%, 21%);
-  --dv-key-shadow-orange: hsl(290, 70%, 36%);
+  --key-background-orange: hsl(268, 47%, 21%);
+  --key-shadow-orange: hsl(290, 70%, 36%);
 
-  --dv-text-dark: hsl(198, 20%, 13%);
-  --dv-text-light: hsl(0, 0%, 100%);
-  --dv-text-yellow: hsl(52, 100%, 62%);
+  --text-dark: hsl(198, 20%, 13%);
+  --text-light: hsl(0, 0%, 100%);
+  --text-yellow: hsl(52, 100%, 62%);
 }
 
-.darkViolet.App {
+/* .darkViolet.App {
   background: var(--dv-background-main);
   color: var(--dv-text-yellow);
 }
@@ -81,4 +82,4 @@
 }
 .darkViolet .specOpButton:active {
   box-shadow: var(--dv-key-shadow) 0px 2px;
-}
+} */
