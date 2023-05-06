@@ -1,6 +1,6 @@
 import { useReducer, useState } from 'react'
 import './App.css'
-import './themes/index.css'
+import './themes/themes.css'
 import Button from './components/Button'
 import { operationButtons } from './data/operButtons'
 import { reducer } from './utils/reducer'
