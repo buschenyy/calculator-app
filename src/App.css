@@ -241,4 +241,8 @@ button.resultButton:active {
   .operationPad {
     width: 90%;
   }
+  .display {
+    font-size: 12vw;
+    height: 26vw;
+}
 }
