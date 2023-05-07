@@ -27,18 +27,13 @@ function App() {
 
   useEffect(() => {
     const theme = localStorage.getItem('theme')
-    if (theme) {
-      setTheme(theme)
-    } else {
-      const darkThemeQuery = window.matchMedia('(prefers-color-scheme: light)')
-      darkThemeQuery.matches ? setTheme('lightGray') : setTheme('darkBlue')
+    const themeQuery = window.matchMedia('(prefers-color-scheme: light)')
+    const updateTheme = (e) => setTheme(e.matches ? 'lightGray' : 'darkBlue')
+    
+    theme ? setTheme(theme) : updateTheme(themeQuery)
 
-      const updateTheme = (e) =>
-        e.matches ? setTheme('lightGray') : setTheme('darkBlue')
-      darkThemeQuery.addEventListener('change', updateTheme)
-
-      return () => darkThemeQuery.removeEventListener('change', updateTheme)
-    }
+    themeQuery.addEventListener('change', updateTheme)
+    return () => themeQuery.removeEventListener('change', updateTheme)
   }, [])
 
   useEffect(() => {
