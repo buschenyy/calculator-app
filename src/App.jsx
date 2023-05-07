@@ -1,4 +1,4 @@
-import { useReducer, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import './App.css'
 import './themes/themes.css'
 import Button from './components/Button'
@@ -24,6 +24,27 @@ const getFormatNum = (num, separator = ' ') => {
 function App() {
   const [theme, setTheme] = useState('')
   const [calc, dispatch] = useReducer(reducer, calcMemoInit)
+
+  useEffect(() => {
+    const theme = localStorage.getItem('theme')
+    if (theme) {
+      setTheme(theme)
+    } else {
+      const darkThemeQuery = window.matchMedia('(prefers-color-scheme: light)')
+      darkThemeQuery.matches ? setTheme('lightGray') : setTheme('darkBlue')
+
+      const updateTheme = (e) =>
+        e.matches ? setTheme('lightGray') : setTheme('darkBlue')
+      darkThemeQuery.addEventListener('change', updateTheme)
+
+      return () => darkThemeQuery.removeEventListener('change', updateTheme)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (theme) localStorage.setItem('theme', theme)
+  }, [theme])
+
   const currentOperand = calc.operator ? 'operand2' : 'operand1'
 
   const displayValue = getFormatNum(
