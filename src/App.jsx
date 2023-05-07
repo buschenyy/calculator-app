@@ -14,6 +14,7 @@ const calcMemoInit = {
 }
 
 const getFormatNum = (num, separator = ' ') => {
+  if (isNaN(+num) || !Number.isFinite(+num)) return 'Error'
   const completeDecimal = num.endsWith('.') ? '.' : ''
   const [int, decimal = ''] = num.split('.', 2)
   const formatInt = int.replace(/\B(?=(\d{3})+(?!\d))/g, separator)
@@ -50,7 +51,6 @@ function App() {
   }, [theme])
 
   const currentOperand = calc.operator ? 'operand2' : 'operand1'
-
   const displayValue = getFormatNum(
     calc[currentOperand] && calc.operand2 ? calc.operand2 : calc.operand1
   )
