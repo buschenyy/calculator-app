@@ -39,11 +39,11 @@ function App() {
   useEffect(() => {
     let transitionDisabled =
       document.documentElement.className.includes('transitionDisabled')
-    if (theme && transitionDisabled) {
+    if (transitionDisabled && theme) {
       document.documentElement.classList.remove('transitionDisabled')
       transitionDisabled = false
     }
-  }, [])
+  }, [theme])
 
   useEffect(() => {
     if (theme) localStorage.setItem('theme', theme)
