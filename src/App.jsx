@@ -21,29 +21,24 @@ const getFormatNum = (num, separator = ' ') => {
   return `${formatInt}${decimal ? `.${decimal}` : ''}${completeDecimal}`
 }
 
+const getInitTheme = () => {
+  const theme = localStorage.getItem('theme')
+  const themeQuery = window.matchMedia('(prefers-color-scheme: light)')
+
+  return theme ? theme : themeQuery.matches ? 'lightGray' : 'darkBlue'
+}
+
 function App() {
-  const [theme, setTheme] = useState('')
+  const [theme, setTheme] = useState(getInitTheme)
   const [calc, dispatch] = useReducer(reducer, calcMemoInit)
 
   useEffect(() => {
-    const theme = localStorage.getItem('theme')
     const themeQuery = window.matchMedia('(prefers-color-scheme: light)')
     const updateTheme = (e) => setTheme(e.matches ? 'lightGray' : 'darkBlue')
-
-    theme ? setTheme(theme) : updateTheme(themeQuery)
 
     themeQuery.addEventListener('change', updateTheme)
     return () => themeQuery.removeEventListener('change', updateTheme)
   }, [])
-
-  useEffect(() => {
-    let transitionDisabled =
-      document.documentElement.className.includes('transitionDisabled')
-    if (transitionDisabled && theme) {
-      document.documentElement.classList.remove('transitionDisabled')
-      transitionDisabled = false
-    }
-  }, [theme])
 
   useEffect(() => {
     if (theme) localStorage.setItem('theme', theme)
