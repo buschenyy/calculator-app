@@ -34,10 +34,15 @@ function App() {
 
   useEffect(() => {
     const themeQuery = window.matchMedia('(prefers-color-scheme: light)')
-    const updateTheme = (e) => setTheme(e.matches ? 'lightGray' : 'darkBlue')
+    const updPreferTheme = (e) => setTheme(e.matches ? 'lightGray' : 'darkBlue')
+    const updStorageTheme = (e) => setTheme(e.newValue)
 
-    themeQuery.addEventListener('change', updateTheme)
-    return () => themeQuery.removeEventListener('change', updateTheme)
+    themeQuery.addEventListener('change', updPreferTheme)
+    window.addEventListener('storage', updStorageTheme)
+    return () => {
+      themeQuery.removeEventListener('change', updPreferTheme)
+      window.removeEventListener('storage', updStorageTheme)
+    }
   }, [])
 
   useEffect(() => {
