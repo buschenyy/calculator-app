@@ -1,6 +1,6 @@
-import { useReducer, useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import './App.css'
-import './themes/index.css'
+import './themes/themes.css'
 import Button from './components/Button'
 import { operationButtons } from './data/operButtons'
 import { reducer } from './utils/reducer'
@@ -21,9 +21,34 @@ const getFormatNum = (num, separator = ' ') => {
   return `${formatInt}${decimal ? `.${decimal}` : ''}${completeDecimal}`
 }
 
+const getInitTheme = () => {
+  const theme = localStorage.getItem('theme')
+  const themeQuery = window.matchMedia('(prefers-color-scheme: light)')
+
+  return theme ? theme : themeQuery.matches ? 'lightGray' : 'darkBlue'
+}
+
 function App() {
-  const [theme, setTheme] = useState('darkBlue')
+  const [theme, setTheme] = useState(getInitTheme)
   const [calc, dispatch] = useReducer(reducer, calcMemoInit)
+
+  useEffect(() => {
+    const themeQuery = window.matchMedia('(prefers-color-scheme: light)')
+    const updPreferTheme = (e) => setTheme(e.matches ? 'lightGray' : 'darkBlue')
+    const updStorageTheme = (e) => setTheme(e.newValue)
+
+    themeQuery.addEventListener('change', updPreferTheme)
+    window.addEventListener('storage', updStorageTheme)
+    return () => {
+      themeQuery.removeEventListener('change', updPreferTheme)
+      window.removeEventListener('storage', updStorageTheme)
+    }
+  }, [])
+
+  useEffect(() => {
+    if (theme) localStorage.setItem('theme', theme)
+  }, [theme])
+
   const currentOperand = calc.operator ? 'operand2' : 'operand1'
 
   const displayValue = getFormatNum(

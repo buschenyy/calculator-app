@@ -1,23 +1,32 @@
 :root {
-  --dot-size: 18px;
-  --toogle-height: 25px;
+  --thumb-size: 17px;
+  --track-height: 25px;
   --main-width: 460px;
   --main-mobile-width: 370px;
   --screen-height: 100px;
   --anim: 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
-* {
+div,
+button,
+input[type='range'] {
   transition: background var(--anim);
 }
 
 .App {
+  background: var(--bg-main);
+  color: var(--text-color);
   display: flex;
   flex-direction: column;
   width: 100vw;
   height: 100vh;
   justify-content: center;
   align-items: center;
+}
+
+.switch,
+.operationPad {
+  background: var(--bg-toggle);
 }
 
 .header {
@@ -64,23 +73,30 @@ input[type='range'].switch {
 }
 .switch::-webkit-slider-runnable-track {
   transition: background-color var(--anim), border-color var(--anim);
-  border-radius: 25px;
-  height: 25px;
+  background: var(--bg-toggle);
+  border: 4.6px solid var(--bg-toggle);
+  border-radius: var(--track-height);
+  height: var(--track-height);
   cursor: pointer;
 }
 .switch::-webkit-slider-thumb {
-  width: 17px;
-  height: 17px;
-  border-radius: 17px;
-  cursor: grab;
+  background: var(--key-bg-special);
+  width: var(--thumb-size);
+  height: var(--thumb-size);
+  border-radius: var(--thumb-size);
   -webkit-appearance: none;
 }
 
+.switch:focus::-webkit-slider-runnable-track {
+  background: var(--focus-slider-track);
+}
+
 .switch::-webkit-slider-thumb:hover {
-  filter: brightness(1.2);
+  filter: brightness(var(--brightness));
 }
 
 .display {
+  background: var(--bg-screen);
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -106,6 +122,9 @@ input[type='range'].switch {
 .operationPad button {
   transition: box-shadow-color var(--anim), box-shadow-x 0s, box-shadow-y 0s,
     background var(--anim);
+  background: var(--key-bg-primary);
+  box-shadow: var(--key-shadow-primary) 0px 5px;
+  color: var(--key-text-primary);
   font-family: 'League Spartan', sans-serif;
   padding-top: 0.2em;
   cursor: pointer;
@@ -121,12 +140,36 @@ input[type='range'].switch {
 
 .operationPad button:active {
   transform: translateY(3px);
+  box-shadow: var(--key-shadow-primary) 0px 2px;
+}
+
+button:hover,
+button.active {
+  filter: brightness(var(--brightness));
 }
 
 button.specOpButton,
 button.resultButton {
   font-size: 25px;
   text-transform: uppercase;
+}
+
+button.specOpButton {
+  background: var(--key-bg-secondary);
+  box-shadow: var(--key-shadow-secondary) 0px 5px;
+  color: var(--key-text-secondary);
+}
+button.specOpButton:active {
+  box-shadow: var(--key-shadow-secondary) 0px 2px;
+}
+
+button.resultButton {
+  background: var(--key-bg-special);
+  box-shadow: var(--key-shadow-special) 0px 5px;
+  color: var(--key-text-special);
+}
+button.resultButton:active {
+  box-shadow: var(--key-shadow-special) 0px 2px;
 }
 
 .btn1 {
