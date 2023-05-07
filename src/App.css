@@ -7,6 +7,12 @@
   --anim: 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
 }
 
+.transitionDisabled div, 
+.transitionDisabled button, 
+.transitionDisabled .switch::-webkit-slider-runnable-track {
+  transition: none !important;
+}
+
 div,
 button,
 input[type='range'] {

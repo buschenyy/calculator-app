@@ -29,11 +29,20 @@ function App() {
     const theme = localStorage.getItem('theme')
     const themeQuery = window.matchMedia('(prefers-color-scheme: light)')
     const updateTheme = (e) => setTheme(e.matches ? 'lightGray' : 'darkBlue')
-    
+
     theme ? setTheme(theme) : updateTheme(themeQuery)
 
     themeQuery.addEventListener('change', updateTheme)
     return () => themeQuery.removeEventListener('change', updateTheme)
+  }, [])
+
+  useEffect(() => {
+    let transitionDisabled =
+      document.documentElement.className.includes('transitionDisabled')
+    if (theme && transitionDisabled) {
+      document.documentElement.classList.remove('transitionDisabled')
+      transitionDisabled = false
+    }
   }, [])
 
   useEffect(() => {
