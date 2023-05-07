@@ -47,7 +47,7 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if (theme) localStorage.setItem('theme', theme)
+    if (theme && document.hasFocus()) localStorage.setItem('theme', theme)
   }, [theme])
 
   const currentOperand = calc.operator ? 'operand2' : 'operand1'
