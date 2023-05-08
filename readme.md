@@ -119,5 +119,6 @@ num.toFixed(n)
 
 ## Author
 
+[![logo](https://github.com/buschenyy/storage/blob/main/buschenyy.png?raw=true)](https://github.com/buschenyy)
 - GitHub - [@buschenyy](https://github.com/buschenyy)
 - Frontend Mentor - [@buschenyy](https://www.frontendmentor.io/profile/buschenyy)
