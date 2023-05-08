@@ -5,33 +5,19 @@ import Button from './components/Button'
 import { operationButtons } from './data/operButtons'
 import { reducer } from './utils/reducer'
 import ThemeSwitch from './components/ThemeSwitch'
+import getFormatNum from './utils/getFromatNum'
+import getInitTheme from './utils/getInitTheme'
 const MAX_OPERAND_LENGTH = 9
-const calcMemoInit = {
+const calcInit = {
   operand1: '0',
   operator: '',
   operand2: '',
   calculated: false,
 }
 
-const getFormatNum = (num, separator = ' ') => {
-  if (isNaN(+num) || !Number.isFinite(+num)) return 'Error'
-  const completeDecimal = num.endsWith('.') ? '.' : ''
-  const [int, decimal = ''] = num.split('.', 2)
-  const formatInt = int.replace(/\B(?=(\d{3})+(?!\d))/g, separator)
-
-  return `${formatInt}${decimal ? `.${decimal}` : ''}${completeDecimal}`
-}
-
-const getInitTheme = () => {
-  const theme = localStorage.getItem('theme')
-  const themeQuery = window.matchMedia('(prefers-color-scheme: light)')
-
-  return theme ? theme : themeQuery.matches ? 'lightGray' : 'darkBlue'
-}
-
 function App() {
   const [theme, setTheme] = useState(getInitTheme)
-  const [calc, dispatch] = useReducer(reducer, calcMemoInit)
+  const [calc, dispatch] = useReducer(reducer, calcInit)
 
   useEffect(() => {
     const themeQuery = window.matchMedia('(prefers-color-scheme: light)')
@@ -103,7 +89,7 @@ function App() {
                 value,
                 currentOperand,
                 type: action,
-                payload: calcMemoInit,
+                payload: calcInit,
                 maxLength: MAX_OPERAND_LENGTH,
               })
             }
