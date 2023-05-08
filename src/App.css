@@ -21,11 +21,6 @@ input[type='range'] {
   color: var(--text-color);
 }
 
-.logo svg{
-  fill: var(--key-bg-secondary);
-  filter: opacity(0.9);
-}
-
 .switch,
 .operationPad {
   background: var(--bg-toggle);

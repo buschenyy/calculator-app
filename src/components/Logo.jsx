@@ -1,4 +1,6 @@
-const Logo = ({...props}) => {
+import './Logo.css'
+
+const Logo = ({ ...props }) => {
   return (
     <a
       style={{ position: 'fixed', top: '10px', left: '10px' }}

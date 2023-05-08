@@ -1,0 +1,12 @@
+.logo svg {
+  fill: var(--key-bg-secondary);
+  filter: opacity(0.9);
+}
+
+.logo svg:hover {
+  filter: brightness(var(--brightness));
+}
+
+.lightGray .logo svg:hover {
+  filter: brightness(calc(var(--brightness) + 0.3));
+}
