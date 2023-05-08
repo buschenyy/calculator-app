@@ -7,6 +7,7 @@ import { reducer } from './utils/reducer'
 import ThemeSwitch from './components/ThemeSwitch'
 import getFormatNum from './utils/getFromatNum'
 import getInitTheme from './utils/getInitTheme'
+import Logo from './components/Logo'
 const MAX_OPERAND_LENGTH = 9
 const calcInit = {
   operand1: '0',
@@ -75,6 +76,7 @@ function App() {
 
   return (
     <div className={`App ${theme}`}>
+      <Logo className={`logo`}/>
       <div className={`header`}>
         <span className={`title`}>calc</span>
         <ThemeSwitch theme={theme} setTheme={setTheme} className={`switch`} />
