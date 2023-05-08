@@ -2,8 +2,8 @@
   --thumb-size: 17px;
   --track-height: 25px;
   display: grid;
-  grid-template: 1fr 1fr / 1fr 1fr;
   align-items: center;
+  grid-template: 1fr 1fr / 1fr 1fr;
 }
 
 .themeSwitch label {
@@ -13,35 +13,35 @@
 .themeSwitch datalist {
   display: flex;
   justify-content: space-around;
+  cursor: default;
   font-size: 0.9em;
   grid-area: 1 / 2 / 2 / 3;
-  cursor: default;
 }
 
 input[type='range'].switch {
   width: 75px;
   margin: -3.5px 0;
-  background-color: transparent;
   appearance: none;
+  background-color: transparent;
   grid-area: 2 / 2 / 3 / 3;
 }
 .switch:focus {
   outline: none;
 }
 .switch::-webkit-slider-runnable-track {
-  transition: background-color var(--anim), border-color var(--anim);
-  background: var(--bg-toggle);
+  height: var(--track-height);
   border: 4.6px solid var(--bg-toggle);
   border-radius: var(--track-height);
-  height: var(--track-height);
+  background: var(--bg-toggle);
   cursor: pointer;
+  transition: background-color var(--anim), border-color var(--anim);
 }
 .switch::-webkit-slider-thumb {
-  background: var(--key-bg-special);
   width: var(--thumb-size);
   height: var(--thumb-size);
   border-radius: var(--thumb-size);
   -webkit-appearance: none;
+  background: var(--key-bg-special);
 }
 
 .switch:focus::-webkit-slider-runnable-track {
