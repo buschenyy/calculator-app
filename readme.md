@@ -23,6 +23,7 @@ Users should be able to:
 - See the size of the elements adjust based on their device's screen size
 - Perform mathmatical operations like addition, subtraction, multiplication, and division
 - Adjust the color theme based on their preference
+- Have their initial theme preference checked using `prefers-color-scheme` and have any additional changes saved in the browser
 
 ### Screenshot
 
@@ -45,7 +46,7 @@ Users should be able to:
 - [Classnames](https://www.npmjs.com/package/classnames) - a simple JavaScript utility for conditionally joining classNames together
 ### What I learned
 
-Make **captions** for input values.
+- Make **captions** for input values.
 
 ```html
 <input type="range" max="2" min="1" id="switch" list="themes" />
@@ -55,7 +56,7 @@ Make **captions** for input values.
 </datalist>
 ```
 
-**Set** the shadow **color** change animation, **but disable** the animation to change the shadow **size**.
+- **Set** the shadow **color** change animation, **but disable** the animation to change the shadow **size**.
 
 ```css
 button {
@@ -63,7 +64,7 @@ button {
 }
 ```
 
-Custom styling `<input type='range' />`
+- Custom styling `<input type='range' />`
 
 ```css
 input[type='range'].range {
@@ -82,7 +83,19 @@ input[type='range'].range {
 }
 ```
 
-Number processing
+- `prefers-color-scheme` request
+
+```js
+window.matchMedia('(prefers-color-scheme: light)')
+```
+
+- Check if the window is active
+
+```js
+document.hasFocus()
+```
+
+- Number processing
 
 ```js
 //checks if the number is an integer
