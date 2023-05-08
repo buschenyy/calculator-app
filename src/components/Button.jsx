@@ -1,3 +1,4 @@
+import './Button.css'
 import cn from 'classnames/bind'
 
 const Button = ({ value, i, onClick, activeOperator }) => {

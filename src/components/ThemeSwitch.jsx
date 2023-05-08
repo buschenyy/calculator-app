@@ -1,3 +1,4 @@
+import './ThemeSwitch.css'
 const availableThemes = ['darkBlue', 'lightGray', 'darkViolet']
 
 const ThemeSwitch = ({ theme, setTheme, ...props }) => {
