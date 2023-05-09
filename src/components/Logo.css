@@ -1,5 +1,6 @@
 .logo svg {
-  fill: var(--key-bg-secondary);
+  display: block;
+  fill: var(--bg-logo);
   filter: opacity(0.9);
 }
 
@@ -7,6 +8,8 @@
   filter: brightness(var(--brightness));
 }
 
-.lightGray .logo svg:hover {
-  filter: brightness(calc(var(--brightness) + 0.3));
+@media (max-height: 670px) and (max-width: 375px) {
+  .logo {
+    display: none;
+  }
 }
