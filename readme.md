@@ -5,6 +5,7 @@ This is a solution to the [Calculator app challenge on Frontend Mentor](https://
 ## Table of contents
 
 - [Overview](#overview)
+  - [Description](#description) 
   - [The challenge](#the-challenge)
   - [Screenshot](#screenshot)
   - [Links](#links)
@@ -15,6 +16,14 @@ This is a solution to the [Calculator app challenge on Frontend Mentor](https://
 - [Author](#author)
 
 ## Overview
+
+### Description
+
+A vibrant, fast and user-friendly calculator - just what you need for quick and accurate math problem solving. This calculator can perform all **basic operations**, such as addition, subtraction, multiplication and division, and **adapts to the screen size** of your device, providing perfect display on any device.
+
+But that's not all! The calculator also allows you to **change the theme** to your liking, and even **remembers your preferences** in the browser. Using the `prefers-color-scheme` **feature**, it will automatically detect your preferred theme for you, and you can enjoy the calculator right after opening it.
+
+This project was developed with **love and care for every detail**, from the **reducer to the scaling**, and took over **50 hours** to achieve this level. The calculator is not only a **powerful tool** for working with math, but also a **reliable and convenient companion** for your everyday life. **Try it yourself** and **see for yourself!**
 
 ### The challenge
 
